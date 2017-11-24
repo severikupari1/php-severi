@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tehtavat</title>
+</head>
+<body>
+ 
+ <?php
+  require_once("db.inc");
+    
+    function Islike($muuttuja){
+    $muuttuja = str_split($muuttuja);
+    if(in_array("*",$muuttuja))
+    {
+      array_pop($muuttuja);
+      $x = implode($muuttuja);
+      return " LIKE '$x%'";
+    }
+    else
+    {  
+      $x = implode($muuttuja);
+      return " = '$x'"; 
+    } 
+  }
+    
+    
+   function Tarkaste($muuttuja){
+       $x = "";
+   if(isset($_GET[$muuttuja]))
+  {
+       
+    $x= $_GET[$muuttuja];    
+  }
+  
+    return $x;
+   
+}
+  
+  
+    
+    
+  
+  print_r($_GET);
+  $nimi = Tarkaste("nimi");
+$osoite = Tarkaste("osoite");
+$postinumero=Tarkaste("postinumero");
+$hae =   Tarkaste("hae");
+ $poista = Tarkaste("poista");
+  $lisaa = Tarkaste("lisaa");
+    $lisaakantaan = Tarkaste("lisaakantaan");
+    $postitoimipaikka = Tarkaste("postitoimipaikka");
+    $lisaaasiakastyyppi = Tarkaste("asiakastyyppi");
+    $peruuta = Tarkaste("peruuta");
+  //poista
+    
+    if($poista != "")    
+    {
+        $poistoquery = "DELETE FROM Asiakas WHERE Avain=$poista";
+        echo $poistoquery;
+        
+        
+        
+        if (mysqli_query($conn, $poistoquery)) {
+           echo "<p>Poisto Onnistui</p>";
+            } else {
+          echo "Ei onnistunut " . mysqli_error($conn);
+        }
+        
+        
+        
+        
+    }
+ //poista if loppu
+  
+  if($hae != "")
+  {
+    $query = "select avain,nimi,osoite,postinro from asiakas WHERE 1=1 ";
+    
+    if($nimi != "")
+    {
+        
+      $query .= " AND nimi " . Islike($nimi) ."";
+    }
+      
+    
+  if($osoite != "")
+    {
+        $query .= " AND osoite " . Islike($osoite) ."";
+    }
+      
+      
+     if($postinumero != "")
+    {
+        $query .= " AND postinro " . Islike($postinumero) ."";
+         
+    }
+        
+      echo $query;
+      
+      $tulos = mysqli_query($conn, $query);
+	
+	if ( !$tulos )
+	{
+		echo "Kysely ep‰onnistui " . mysqli_error($conn);
+	}
+	else
+	{
+        
+		//k‰yd‰‰n tavarat l‰pi 
+        echo "<table>";
+        echo "<tr><th>Nimi</th><th>Osoite</th><th>Postinumero</th></tr>";
+		while ($rivi = mysqli_fetch_array($tulos, MYSQL_ASSOC)) { 
+			//haetaan nimi, hinta ja m‰‰r‰ muuttujiin 
+			$avain = $rivi["avain"];
+			$nimituloste = $rivi["nimi"]; 
+			$osoitetuloste = $rivi["osoite"];
+            $postinumerotuloste = $rivi["postinro"];
+			//tulostetaan taulukon rivi 
+			
+     
+ echo "<tr><td>$nimituloste</td><td>$osoitetuloste</td><td>$postinumerotuloste</td><td><a href=\"php-tehtavat.php?poista={$avain}\">Poista</a></td></tr>";
+  
+		} 
+                echo "</table>";
+	}
+  
+  
+  }
+    
+    
+  
+  ?>
+      
+  
+  <h1>Haku</h1>
+  <form action="php-tehtavat.php" method="get">
+   <table>
+   <tr><th>nimi</th>  <td><input type="text" name="nimi"></td> </tr>
+   <tr><th>osoite</th> <td><input type="text"  name="osoite"></td> </tr>
+   <tr><th>postinumero</th> <td><input type="text" name="postinumero"></td> </tr>
+   
+    
+    <tr><th>Asty</th> <td>
+      
+ <?php
+        if(isset($_GET["tyyppi"])){
+            $asty =$_GET["tyyppi"];
+        }
+        else{
+            $asty ="";
+        }
+ $haku = "SELECT avain, selite FROM asiakastyyppi";
+ 				$atyyppi = mysqli_query($conn, $haku);
+ 					if (!$atyyppi){
+ 						echo "virhe asiakastyypiss‰ " . mysqli_error($conn);
+ 					}else{
+ 						echo "<select name = 'tyyppi' >";
+						echo "<option value = ''  ".($asty==""?"selected":"").">empty</option>";
+ 						while ($rivi = mysqli_fetch_array($atyyppi, MYSQLI_ASSOC)){
+ 							$x = $rivi["avain"];
+ 							$y = $rivi["selite"];
+
+ 							echo "<option value='$x' ".($x==$asty?"selected":"").">$y</option>";
+ 						}
+ 						echo "</select>";
+ 					}
+ ?>
+</td></tr></table>
+
+ <br>
+ <input type="submit" value="Hae" name="hae"> 
+ <input type="submit" value="Lis‰‰" name="lisaa">
+  </form>
+  
+  <?php
+    
+    
+   if($lisaa != "")
+    {
+       $insertquery = "INSERT INTO `asiakas` (`AVAIN`, `NIMI`, `OSOITE`, `POSTINRO`, `POSTITMP`, `LUONTIPVM`, `ASTY_AVAIN`) VALUES
+(1, 'KALLE TAPPINEN', 'OPISTOTIE 2', '70100', 'KUOPIO', '2011-12-01', 1)";
+       
+       
+       
+       echo "<h1>Lis‰ys</h1>";
+        echo '<form action="php-tehtavat.php" method="get">
+   <table>
+   <tr><th>nimi</th>  <td><input type="text" name="nimi"></td> </tr>
+   <tr><th>osoite</th> <td><input type="text"  name="osoite"></td> </tr>
+   <tr><th>postinumero</th> <td><input type="text" name="postinumero"></td> </tr> 
+   <tr><th>Postitoimipaikka</th><td><input type="text" name="postitoimipaikka"></td></tr>
+   <tr><th>Asiakastyyppi</th><td>
+   <select name="asiakastyyppi">
+      <option value="1" >Yritysasiakas</option>
+      <option value="2" >Kuluttaja asiakas</option>
+  </select>
+   
+   </td></tr>
+   </table>
+   ';
+       echo '<input type="submit" value="Ok" name="lisaakantaan">';
+       echo '<input type="submit" value="peruuta" name="peruuta">
+       </form>';
+       
+       
+       
+    }
+    if($lisaakantaan != "")
+       {
+        $timestamp = date('Y-m-d G:i:s');
+           $insertquery = "INSERT INTO `asiakas` ( `NIMI`, `OSOITE`, `POSTINRO`, `POSTITMP`, `LUONTIPVM`, `ASTY_AVAIN`) VALUES
+('$nimi', '$osoite', '$postinumero', '$postitoimipaikka', '$timestamp', $lisaaasiakastyyppi)";
+           echo $insertquery;
+           if(mysqli_query($conn, $insertquery)){
+               echo "<p>Lis‰ys onnistui</p>";
+           }
+           else 
+           {
+               echo "lis‰ys epaonnistui ";
+           }
+           
+       }
+    
+    
+    ?>
+  
+  
+</body>
+</html>

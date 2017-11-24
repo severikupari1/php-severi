@@ -1,0 +1,23 @@
+<!--
+42. Tee PHP-sovellus, joka hakee tietokannasta Asiakas-taulusta dataa annettujen hakuehtojen perusteella. Hakuehtoina nimi, osoite, postinro. Hakuehtojen mukainen data näytetään taulukossa. Jos käyttäjä ei anna yhtään hakuehtoa, haetaan kaikki asiakkaat. Hakuehtoina voidaan syöttää mikä tahansa em. hakuehtojen kombinaatio (esimerkiksi nimi ja postinro, jolloin haetaan asiakkaat, joiden nimi JA postinumero vastaavat annettuja hakuehtoja).
+
+HUOM! Tässä tehtävässä täytyy hakuehto (esimerkiksi nimi antaa täydellisenä, ts. jokerimerkkien käyttöä ei tarvitse tukea).
+
+SQL-lauseita:
+
+- Jos halutaan hakea pelkällä nimellä: SELECT Avain, nimi FROM asiakas WHERE nimi = 'kalle'
+
+- Jos halutaan hakea nimellä JA osoitteella: SELECT Avain, nimi FROM asiakas WHERE nimi = 'kalle' AND osoite='teku'
+
+- Jos halutaan hakea nimellä JA osoitteella JA postinumerolla: SELECT Avain, nimi FROM asiakas WHERE nimi = 'kalle' AND osoite='teku' AND postinro='71800'
+
+43. Lisää edelliseen tehtävään mahdollisuus käyttää jokerimerkkejä (esimerkiksi *).
+
+- Hakuehto on tällöin muodossa: SELECT Avain, nimi FROM asiakas WHERE nimi like 'k%'
+
+44. Lisää edelliseen tehtävään hakuehdoksi asiakastyyppi. Tyyppi valitaan alasvetovalikosta, hae asiakastyypit tietokannasta. Tee siis PHP-koodi, joka hakee tietokannasta kaikki asiakastyypit ja tekee niistä HTML:n SELECT-elementin ENNEN KUIN sivu näytetään käyttäjälle. Ota huomioon, että ASIAKASTYYPPI-taulussa on useita sarakkeita, päätä itse mitä näytät käyttäjälle. Mieti, miten koodaat OPTION-elementin VALUE-attribuutin!!
+
+- Asiakas-taulussa on asty_avain-sarake. Tee siis ensin alasvetovalikko näytölle, johon haet datan asiakastyyppi-taulusta (hae avain ja lyhenne). Laita avain option-elementin value-attribuuttiin ja näytä lyhenne käyttäjälle. Kun käyttäjä valitsee asiakastyypin, saat selville asiakastyypin avaimen, jonka laitat hakuehtoon tyyliin: SELECT avain, nimi FROM asiakas WHERE asty_avain = 3 (missä 3 on alasvetovalikosta saatu avain).-->
+
+
+

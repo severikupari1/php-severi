@@ -1,0 +1,8 @@
+23. Tee HTML-sivu, jolla käyttäjä syöttää nimen, bruttotulot ja veroprosentin. Syötetyt tiedot lähetetään PHP-sivulle, joka laskee annettujen tietojen perusteella nettotulot ja tulostaa nimen, bruttotulot, veroprosentin ja nettotulot "jotenkin".
+
+24. Tee sivu (HMTL), jolla käyttäjä syöttää yhteystiedot (nimi, osoite, puhnro) ja kolmen omistamansa kirjan nimen. Tiedot lähetetään PHP-sivulle, joka kokoaa tiedot ”nätisti” taulukkoon. Jos kirjoja annettiinkin vähemmän kuin 3, tulostetaan lisäksi linkki, josta käyttäjä pääsee jonkun kirjaston sivulle …
+
+25. Tee HTML-sivu, jolla käyttäjä syöttää kotikunnan (alasvetovalikko) ja postinumeron. Kun käyttäjä painaa ”Tarkista”-nappia, lähetetään tiedot php-sivulle, joka tarkistaa postinumeron oikeellisuuden (riittää tarkistaa että pituus on 5). Jos tiedot ovat oikein, tulostetaan syötetyt tiedot . Jos tiedot ovat väärin, kerrotaan tieto käyttäjälle  ja tulostetaan linkki takaisin HTML-sivulle, jolla annetaan kotikunta ja postinumero.
+
+26. Lisää edelliseen tehtävään: kun käyttäjä klikkaa linkkiä takaisin pääsivulle (koska postinumero oli väärin), näytetään pääsivulla jossain kohtaa tieto "Postinumero väärin, syötä tiedot uudestaan".
+

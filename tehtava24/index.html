@@ -1,0 +1,37 @@
+<!--24. Tee sivu (HMTL), jolla käyttäjä syöttää yhteystiedot (nimi, osoite, puhnro) ja kolmen omistamansa kirjan nimen. Tiedot lähetetään PHP-sivulle, joka kokoaa tiedot ”nätisti” taulukkoon. Jos kirjoja annettiinkin vähemmän kuin 3, tulostetaan lisäksi linkki, josta käyttäjä pääsee jonkun kirjaston sivulle …
+-->
+ 
+
+<html>
+<head><title>tehtava 24</title>
+    <link rel="stylesheet" type="text/css" href="style.css"></head>
+    <body class="body1">
+    
+    <form action="testi1.php" method="get">
+        <legend>Yhteystiedot</legend>
+        <table style="width: 80%">
+    
+        Nimi : <input type="text" name="nimi">
+        <br />
+        osoite : <input type="text" name="osoite">
+        <br />
+        puhelinnumero : <input type="text" name="puhelinnumero">
+        <br />
+        kirja 1 : <input type="text" name="kirja1">
+        <br />
+        kirja 2 : <input type="text" name="kirja2">
+        <br />
+        kirja 3 : <input type="text" name="kirja3">
+        <br />
+         <input type="submit" name="laheta" value="laheta">    
+        </table>
+        
+        
+    </form>
+        
+    
+    
+    </body>
+
+
+</html>

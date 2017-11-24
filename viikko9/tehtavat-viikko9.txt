@@ -1,0 +1,17 @@
+45a. Muuta tehtävää 42-44 niin, että asiakastyyppi-alasvetovalikosta ei ole pakko valita mitään. Ts. lisää alasvetovalikkoon yksi "tyhjä arvo" ja huomioi se kun rakennat sql-lausetta.
+
+45b. Laajenna edellistä tehtävää niin, että käyttäjä voi poistaa asiakkaan. Eli lisää esimerkiksi tulostaulukkoon kuhunkin asiakasriviin uusi sarake, jossa on linkki. Linkki kutsuu php-sivua, joka vain poistaa parametrina tulleen asiakkaan. Mieti itse, mikä arvo kannattaa antaa parametrina, jotta poisto onnistuu ”helposti”. Ja ilmoita jotenkin poiston onnistumisesta/epäonnistumisesta.
+
+SQL-esimerkki: DELETE FROM Asiakas WHERE Avain=3 (Avain on taulun avain-kenttä)
+
+46. Laajenna edellisiä tehtäviä niin, että käyttäjä voi lisätä käsittelysivun avulla uuden asiakkaan. Tee hakusivulle linkki, josta aukeaa uusi sivu (TAI uusi lohko olemassa olevalle sivulle), jolla annetaan asiakkaan lisäyksessä vaaditut tiedot (nimi, osoite, postinro, postitmp, asiakastyyppi). Huomioi asiakastyyppi (alasvetovalikko). Ilmoita lisäämisen onnistumisesta/epäonnistumisesta jotenkin.
+
+HUOM! Käsittelynäytöllä (tai lohkossa) täytyy olla Ok-nappi ja Peruuta-nappi. Ok-napin painalluksen jälkeen lisätään asiakas kantaan, suljetaan käsittelynäyttö ja palataan asiakkaan hakunäytölle. Jos lisääminen epäonnistui, ilmoitetaan virheilmoitus KÄSITTELYNÄYTÖLLÄ, joka jää aktiiviseksi näytöksi. Peruuta-napin painamisen jälkeen palataan hakunäytölle (jossa ei luonnollisesti tehdä mitään).
+
+SQL: INSERT INTO Asiakas (Nimi, Osoite, Asty_avain) VALUES ('Kalle', 'teku', 3)
+
+HUOM! Jos kenttä on merkki-tyyppiä (kuten em. esimerkissä Nimi- ja Osoite-kentät, täytyy arvo olla hipsuissa! Asty_avain on numeerinen kenttä, sen arvo ei tarvitse olla hipsuissa.
+
+47. Muuta tehtävää 45 niin, että poistettu tieto näkyy heti "Tallenna"-napin painamisen jälkeen päänäytöllä. HUOM! Jos asiakkaat on alunperin haettu jollain hakuehdoilla, täytyy nämä samat hakuehdot olla edelleen voimassa muutoksen jälkeen (eli jos alunperin haettiin kaikki "Kalle" alkuiset asiakkaat, täytyy muutoksen jälkeen tulostaulukossa näkyä edelleen "Kalle"-alkuiset asiakkaat).
+
+VINKKI: Aina kun painetaan Hae-nappia, talleta hakuehdot Sessioon, josta ne on aina luettavissa poiston jälkeen!

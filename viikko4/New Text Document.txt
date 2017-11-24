@@ -1,0 +1,25 @@
+Tehtävät (luento ti 26.9.2017), valmiina ti 3.10.2017
+27. Tee php-sivu (olkoon sivun nimi data.php), jolla käyttäjä syöttää sukupuolen (mies/nainen, radiobutton), koulutus (peruskoulu, lukio, ammattikoulu, ammattikorkeakoulu; checkbox) ja nimen. Kun käyttäjä painaa ”Talleta”-nappia, lähetetään tiedot data_check.php-sivulle, jossa tarkistetaan ensin tiedot: Jos nimi on tyhjä tai koulutusta ei ole valittu, tulostetaan sivulle tieto puutteista. Jos tiedot ovat oikein, tulostetaan ne sivulle HTML-taulukkoon.
+
+28. Lisää edelliseen tehtävään toiminto, joka tulostaa (oikein syötettyjen tietojen jälkeen) sivun data_check.php alalaitaan linkin. Linkkiä klikkaamalla avautuu sivu (kiitos.php), jossa kiitetään käyttäjää sivuston käyttämisestä (lisää kiitosviestiin myös käyttäjän nimi, siis se, jonka käyttäjä syötti ekalla sivulla).
+
+29. Tee sivu (HTML), jolla kysytään käyttäjältä auton rekisterinumero ja auton 
+haltija. Sivulla on myös ”Varaa”-nappi, jolla käyttäjä voi varata suoraan
+1. vapaan katsastusajan 
+seuraavan logiikan mukaan:
+
+    jos rekisterinumeron numero-osan 1. numero on välillä 1-5, on aika ”keväällä”
+    muuten aika on ”syksyllä” (keksi jotkin ajat em. spekseillä).
+Käyttäjälle riittää ilmoittaa varattu aika (jossain) muodossa ”Rekisterinumerolle XXX-YYY on varattu aika dd.mm.yyyy”.
+
+Sivulla on lisäksi toiminto, jolla käyttäjä voi myös kysellä mahdollisia vapaita katsastusaikoja painamalla ”Ehdota”-nappia. Sovellus ehdottaa vapaita aikoja (3 mahdollista vapaata aikaa) seuraavan logiikan mukaan:
+
+    jos rekisterinumeron kirjainosan 1. kirjain on välillä A-H, ehdotetaan aikoja helmikuusta
+    muuten ehdotetaan aikoja syyskuusta.
+Ehdotetut ajat näkyvät linkkeinä, joita klikkaamalla käyttäjä vahvistaa varauksen (linkkiä klikkaamalla mennään jollekin php-sivulle, joka tulostaa varmistustekstin ”Rekisterinumerolle XXX-YYY on varattu aika dd.mm.yyyy”.
+
+Tarkista rekisterinumeron oikeellisuus (riittää tarkistaa pituus 7 merkkiä), jos se on väärin, ilmoita siitä käyttäjälle ja generoi linkki, josta pääsee takaisin aloitussivulle.
+
+HUOM! Tehtävässä EI tarvitse käyttää date-tietotyyppejä, pvm:t riittää koodata merkkijonoina!
+
+HUOM! Tehtävässä EI SAA KÄYTTÄÄ Sessionia eikä Cookieta!

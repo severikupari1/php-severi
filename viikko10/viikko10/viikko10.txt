@@ -1,0 +1,7 @@
+48. Lisää hakutuloksiin (siis se taulukko, jossa näytetään löydetyt asiakkaat) myös asiakkaan tyyppi (joko lyhenne- tai selite-kenttä). Eli joudut tekemään haun, jossa haet dataa sekä asiakas- että asiakastyyppi-tauluista (inner join).
+
+49. Lisää edellisiin tehtävään mahdollisuus muokata asiakasta. Eli lisää tulostaulukkoon kuhunkin asiakasriviin uusi sarake, jossa on linkki. Linkki kutsuu php-sivua, joka saa parametrinaan muutettavan asiakkaan avaimen. Avaimen perusteella haetaan tietokannasta muutettavan asiakkaan tiedot, jotka näytetään muokkaus-näytön kentissä (eli käyttäjä voi muuttaa olemassa olevia tietoja haluamallaan tavalla). Ota huomioon, että asiakastyyppi alasvetovalikosta pitää valita oletuksena tämän hetkinen asiakastyyppi. Eli käyttäjä näkee kentissä tämän hetkiset kenttien arvot, joita käyttäjä voi muuttaa haluamallaan tavalla. HUOM! tässä kohtaa EI tarvitse tarkistaa ovatko tiedot muuttuneet (jos käyttäjä painaa Peruuta -> ei herjata käyttäjälle).
+
+SQL: UPDATE Asiakas SET Nimi = 'jaakko', osoite='joku' WHERE Avain=2
+
+50. Laajenna edellistä tehtävää niin, että asiakkaan muutoksen jälkeen haetaan tiedot uudelleen (ja käyttäen samoja hakuehtoja, joilla saatiin haettua asiakkaat aiemmin). HUOM! Tässä kohtaa pitää hakuehtojen säilyä kentissä Hae-napin painamisen jälkeen.

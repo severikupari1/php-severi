@@ -1,0 +1,6 @@
+34. Muuta edellistä tehtävää niin, että kaupungille voi syöttää tiedon vain kerran. Jos käyttäjä yrittää syöttää tietoa uudelleen, tulostetaan sivun ylälaitaan viesti ”Kaupungille XX on jo syötetty lämpötila!”.
+
+35. Lisää edelliseen tehtävään mahdollisuus poistaa halutun kaupungin tiedot sessiosta. Käyttäjä syöttää kaupungin nimen ja painaa ”Poista”-nappia, jolloin kaupunki poistuu sessiosta, jos se sieltä löytyy. Poiston status (onnistui/epäonnistui, jos sessiota ei löydy) ilmoitetaan käyttäjälle jotenkin. 
+
+36. Muokkaa edellisiä tehtäviä niin, että käyttäjä voi syöttää kaupunkin, lämpötilan ja kosteusprosentin. Käyttäjä voi siis myös poistaa ja tulostaa em. tiedot (ja täytyy tarkistaa, että kaupunkia EI ole vielä syötetty).
+Tästä tehtävästä 36 saa triplapisteet  (eli jos teet kaikki tehtävät -> 6 merkintää)

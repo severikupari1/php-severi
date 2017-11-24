@@ -1,0 +1,27 @@
+Tehtävät (luento ti 24.10.2017), valmiina ti 31.10.2017
+37. Tee PHP:llä ”köyhän miehen” verkkokauppasovellus. Sovellus käyttää hyväksi keksejä ja sessiota asiakkaan ostosten ylläpitämiseen. Verkkokaupassa myydään esimerkiksi kirjoja, joilla jokaisella on yksilöllinen id (tai joku muu vastaava tapa yksilöidä tilattu tuote, se voi olla myös vaikka kirjan nimi). Sovellus jakaantuu seuraavasti erilaisiin näyttöihin:
+
+Login.php-näytöllä loggaudutaan sovellukseen
+Kirjaudu-napin alla kutsutaan checkLogin.php-sivua, joka tarkistaa tunnukset (kovakoodaa jotkut tunnukset)
+Login-näytöllä annetaan myös nimi ja luottokortin numero tilausta varten (talleta nämä sessioon)
+Onnistuneen loggautumisen jälkeen avataan päänäyttö (käytä header-funktiota siirtymiseen uudelle sivulle)
+
+Kirjautuneen käyttäjän tiedot talletetaan keksiin
+Jokaisella sivulla tarkistetaan, onko käyttäjä kirjautunut ja jos ei ole, avataan login-näyttö (ts. löytyykö keksistä käyttäjän tietoja)
+Jos kirjautuminen EI onnistu, näytetään käyttäjälle login.php-sivu (voi virittää tätä vielä niin, että tällöin sivulla kerrotaan, miksi kirjautuminen epäonnistui)
+
+38. Lisää edelliseen tehtävään paanaytto.php. Päänäytöllä käyttäjä voi ostaa halutun kirjan
+
+Tilaukseen annetaan kirjan nimi ja lukumäärä (jos sama kirja lisätään uudestaan, korvataan kirjan kappalemäärää uudella kappalemäärällä)
+Tilaus ylläpidetään session:ssa (jotenkin)
+Tilaukset näkyvät koko ajan päänäytöllä taulukossa
+39. Lisää edelliseen tehtävään yksittäisen tilauksen poisto-toiminto
+
+Toteuta niin, että tilaukset-taulukossa on kullakin tilauksella linkki, jota klikkaamalla saa tilauksen poistettua
+
+40. Lisää edelliseen tehtävään: Kun tilaukset on tehty, siirrytään (jotenkin) vahvistusnäytölle, jossa näytetään yhteenvetona tilaukset ja nimi sekä luottokortin numeron
+
+Sivulla on Vahvista-toiminto, joka tekee leikisti tilauksen ja siirtyy takaisin päänäytölle.
+41. Lisää edelliseen tehtävään logout-toiminto
+
+Kirjaa käyttäjän ulos järjestelmästä (poistaa siis keksistä käyttäjän tiedot) ja siirtyy takaisin login-näytölle
