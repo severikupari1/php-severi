@@ -1,0 +1,19 @@
+51. Lisää asiakkaan lisäysnäytölle kenttä aktivointiajalle ja –päivälle (lisää em. kentät myös tietokantaan, käytä tyyppejä date ja time). Käyttäjän saa syöttää em. ajat suomalaisessa muodossa (”23.11.2012” ja ”12:35”). HUOM! tarvitaan siis 2 eri kenttää: aktivointiaika ja aktivointipvm!
+
+52. Lisää edelliseen tehtävään: tarkista jotenkin että syötetty pvm on oikeassa muodossa.
+
+53. Lisää asiakkaan lisäykseen tarkistus, että aktivointipvm voi olla max 2 viikkoa eteenpäin nykyisestä ajasta.
+
+54. Lisää hakuehdoksi aktivointiaika alku ja loppu. Hakuehto tulkitaan niin, että tietokannassa oleva aktivointiaika täytyy sattua annettujen hakuehtojen väliin. Laita hakuehtoihin oletusarvoksi kuluvan kuukauden alku ja loppu (suomalaisessa muodossa).
+
+
+
+
+
+
+
+
+$insertquery = "INSERT INTO `asiakas` ( `NIMI`, `OSOITE`, `POSTINRO`, `POSTITMP`, `LUONTIPVM`, `ASTY_AVAIN`,`aktivointiaika`,`aktivointipaiva`) VALUES
+( '$Lisaysnimi', '$Lisaysosoite', '$Lisayspostinumero', '$Lisayspostitoimipaikka', '2011-12-01', $lisaaasiakastyyppi,'$aktivointiaika','$aktivointipaiva')";
+
+
