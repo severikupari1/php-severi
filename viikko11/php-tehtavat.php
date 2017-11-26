@@ -158,7 +158,7 @@ $_SESSION["asiakastiedot"]["postinumero"]= $postinumero;
         $query = $_SESSION["query"];
         
          $tulos = mysqli_query($conn, $query);
-	
+	   
 	if ( !$tulos )
 	{
 		echo "Kysely epäonnistui " . mysqli_error($conn);
@@ -167,19 +167,18 @@ $_SESSION["asiakastiedot"]["postinumero"]= $postinumero;
 	{
         }
 		//käydään tavarat läi
-
+        echo 
         echo "<table>";
-        echo "<tr><th>Nimi</th><th>Osoite</th><th>Postinumero</th><th></th></tr>";
+        echo "<tr><th>Nimi</th><th>Osoite</th><th>Postinumero</th><th></th><th>Asiakas selite</th><th></th></tr>";
 		while ($rivi = mysqli_fetch_array($tulos, MYSQL_ASSOC)) { 
+			//haetaan nimi, hinta ja määrä muuttujiin 
 			//haetaan nimi, hinta ja määrä muuttujiin 
 			$avain = $rivi["avain"];
 			$nimituloste = $rivi["nimi"]; 
 			$osoitetuloste = $rivi["osoite"];
             $postinumerotuloste = $rivi["postinro"];
-			//tulostetaan taulukon rivi 
-			
-     
- echo "<tr><td>$nimituloste</td><td>$osoitetuloste</td><td>$postinumerotuloste</td><td><a href=\"php-tehtavat.php?poista={$avain}\"><i class=\"fa fa-trash-o fa-2x\" aria-hidden=\"true\"></i></a></td></tr>";
+            $asikasselite = $rivi["lyhenne"];     
+ echo "<tr><td>$nimituloste</td><td>$osoitetuloste</td><td>$postinumerotuloste</td><td><a href=\"php-tehtavat.php?poista={$avain}\"><i class=\"fa fa-trash-o fa-2x testi\" aria-hidden=\"true\"></i></a></td><td>$asikasselite</td><td><a href=\"php-tehtavat.php?muutosavain={$avain}\">Muokkaa</a></td></tr>";
   
 		} 
                 echo "</table>";
@@ -340,12 +339,10 @@ $_SESSION["asiakastiedot"]["postinumero"]= $postinumero;
     if($lisaakantaan != "")
        {
         $unixaktivointi = strtotime($aktivointiaika);
-$luontiaika = date("H:i",$unixaktivointi);
-        
-        
-//      
-       
+        $luontiaika = date("H:i",$unixaktivointi);
+
         //echo $aktivointipaiva;
+        
         echo "   ";
        $muokattuluontipaiva= str_replace(".","-",$aktivointipaiva); 
         echo $muokattuluontipaiva;
@@ -357,14 +354,20 @@ $luontiaika = date("H:i",$unixaktivointi);
         
         if(strlen($testi[2]) == 4){
             
+
+            
         }
         else{
             echo "Annoit luontipaivamaaran vaarin!";
+            $unixluontipaiva = strtotime($muokattuluontipaiva);       
+        $luontipaiva = date("Y-m-d",$unixluontipaiva);
         }
         
         
-$unixluontipaiva = strtotime($aktivointipaiva);
-$luontipaiva = date("Y-m-d",$unixluontipaiva);
+        
+        
+        
+
         
         //echo $luontipaiva;
         echo "   ";
@@ -378,7 +381,7 @@ $luontipaiva = date("Y-m-d",$unixluontipaiva);
         
         
         
-        echo $insertquery;
+       // echo $insertquery;
            if(mysqli_query($conn, $insertquery)){
                echo "<p>Lisäys onnistui</p>";
            }
