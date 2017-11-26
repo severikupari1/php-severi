@@ -348,17 +348,25 @@ $luontiaika = date("H:i",$unixaktivointi);
         //echo $aktivointipaiva;
         echo "   ";
        $muokattuluontipaiva= str_replace(".","-",$aktivointipaiva); 
-        //echo $muokattuluontipaiva;
+        echo $muokattuluontipaiva;
         echo "   ";
-        
+       // echo $aktivointipaiva;
 
+        $testi =explode("-",$muokattuluontipaiva);
+    var_dump($testi);
         
+        if(strlen($testi[2]) == 4){
+            
+        }
+        else{
+            echo "Annoit luontipaivamaaran vaarin!";
+        }
         
         
 $unixluontipaiva = strtotime($aktivointipaiva);
 $luontipaiva = date("Y-m-d",$unixluontipaiva);
         
-        echo $luontipaiva;
+        //echo $luontipaiva;
         echo "   ";
     
    // echo $muokattuluontipaiva;
