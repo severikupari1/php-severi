@@ -99,10 +99,6 @@ $Lisaysosoite    = mysqli_real_escape_string($conn, Tarkaste("Lisaysosoite"));
 $Lisayspostinumero  = mysqli_real_escape_string($conn, Tarkaste("Lisayspostinumero"));
 $Lisayspostitoimipaikka = mysqli_real_escape_string($conn, Tarkaste("Lisayspostitoimipaikka"));
     
-     
-    
-   // echo "$aktivointiaika  ";
-  //  echo "$aktivointipaiva   ";
      $sessionimuuttuja= array();
     $_SESSION["asiakastiedot"]["asty"]= $asty;   
     $_SESSION["asiakastiedot"]["nimi"]= $nimi;
@@ -110,41 +106,15 @@ $_SESSION["asiakastiedot"]["osoite"]= $osoite;
 $_SESSION["asiakastiedot"]["postinumero"]= $postinumero;
     $aktivointiaika = mysqli_real_escape_string($conn, Tarkaste("aktivointiaika"));
     $aktivointipaiva =mysqli_real_escape_string($conn, Tarkaste("aktivointipaiva"));
-   // echo $aktivointiaika;
-    
-    
-   // echo $unixaktivointi;
-    echo "        ";
-   // $unixaktivointi = date("Y-d-m",$unixaktivointi);
-    //echo $unixaktivointi;
-    echo "        ";
-    //$unixtoaika = date;
-    
- 
-   // echo $aikamuuttuja;
-    
-    
-    
-    
-    
-    //echo $unixluontipaiva;
-    
-    
-    
-    //echo $luontipaiva;
-    //echo "   $viivapois";
 
     
     $sessionimuuttuja = $_SESSION["asiakastiedot"];
     
-   
+    $nykyaika = time();
+    $datenow = date("d-m-Y",$nykyaika);
+    echo $datenow;
     
 
-   
-  // print_r($sessionimuuttuja);
-   // print_r($_SESSION["query"]);
-   //print_r($_SESSION);
-    
     if($poista != "")    
     {
         $poistoquery = "DELETE FROM Asiakas WHERE Avain=$poista";     
