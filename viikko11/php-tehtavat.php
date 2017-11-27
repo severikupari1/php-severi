@@ -112,7 +112,10 @@ $_SESSION["asiakastiedot"]["postinumero"]= $postinumero;
     
     $nykyaika = time();
     $datenow = date("d-m-Y",$nykyaika);
-    echo $datenow;
+    
+    
+ $kaksiviikkoa = time() + (14 * 24 * 60 * 60);
+                   
     
 
     if($poista != "")    
