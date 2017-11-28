@@ -314,23 +314,22 @@ $_SESSION["asiakastiedot"]["postinumero"]= $postinumero;
         $unixaktivointi = strtotime($aktivointiaika);
         $luontiaika = date("H:i",$unixaktivointi);
 
-     //   echo $aktivointipaiva;
+    
         
-        echo "   ";
+        
        $muokattuluontipaiva= str_replace(".","-",$aktivointipaiva); 
-       // echo $muokattuluontipaiva;
-        echo "   ";
-       // echo $aktivointipaiva;
-
+   
         $testi =explode("-",$muokattuluontipaiva);
     
-       // var_dump($testi);
+        $pvm = "$muokattuluontipaiva";
+        
+       
         
         if($aktivointipaiva != ""){
             if(strlen($testi[2]) == 4){
             
                 $unixluontipaiva = strtotime($muokattuluontipaiva);       
-        $luontipaiva = date("Y-m-d",$unixluontipaiva);
+                $luontipaiva = date("Y-m-d",$unixluontipaiva);
             
         }
         else{
