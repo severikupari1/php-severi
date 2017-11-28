@@ -34,7 +34,10 @@ CREATE TABLE `customer` (
   `address` varchar(50) NOT NULL,
   `billing_address` varchar(50) NOT NULL,
   `phone_number` varchar(50) NOT NULL,
-  `email` varchar(200) NOT NULL
+  `email` varchar(200) NOT NULL,
+    `apartment_type` varchar(200) NOT NULL,
+    `apartment_area` varchar(200) NOT NULL,
+    `property` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
