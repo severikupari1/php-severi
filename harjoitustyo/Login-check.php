@@ -28,12 +28,16 @@ require_once("db.inc");
         $email = Tarkaste("email",$conn);
         $rekisteroi = Tarkaste("rekisteroi",$conn);
         $salasanauudelleen = Tarkaste("salasanauudelleen",$conn);
+        $asuntotyyppi= Tarkaste("asuntotyyppi",$conn);
+        $asuntopintala   = Tarkaste("asuntopintala",$conn);
+        $tonttipintala = Tarkaste("tonttipintala",$conn);
+
         //alempiform
         $kayttajatunnuscheck = Tarkaste("kayttajatunnuscheck",$conn);
         $salasanacheck = Tarkaste("salasanacheck",$conn);
 
 if($rekisteroi != ""){
-    $inserquery = "INSERT INTO `customer`(`key_id`, `username`, `password`, `name`, `address`, `billing_address`, `phone_number`, `email`, `apartment_type`, `apartment_area`, `property`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6],[value-7],[value-8],[value-9],[value-10],[value-11])"
+    $inserquery = "INSERT INTO `customer`(`username`, `password`, `name`, `address`, `billing_address`, `phone_number`, `email`, `apartment_type`, `apartment_area`, `property`) VALUES ('$kayttajatunnus','$salasana','$nimi','$kayntiosoite','$laskutusosoite','$puhelinnumero','$email','$asuntotyyppi','$asuntopintala','$tonttipintala')";
 }
 
 ?>
