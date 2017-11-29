@@ -1,6 +1,6 @@
 <?php session_start();  
 require_once("db.inc");
-    $conn = @mysqli_connect(DB_HOST, DB_USER, DB_PASSWD);
+    
     
     function Tarkaste($muuttuja,$conn){
        
@@ -37,8 +37,10 @@ require_once("db.inc");
         $salasanacheck = Tarkaste("salasanacheck",$conn);
 
 if($rekisteroi != ""){
-    $inserquery = "INSERT INTO `customer`(`username`, `password`, `name`, `address`, `billing_address`, `phone_number`, `email`, `apartment_type`, `apartment_area`, `property`) VALUES ('$kayttajatunnus','$salasana','$nimi','$kayntiosoite','$laskutusosoite','$puhelinnumero','$email','$asuntotyyppi','$asuntopintala','$tonttipintala')";
+    $insertquery = "INSERT INTO `customer`(`username`, `password`, `name`, `address`, `billing_address`, `phone_number`, `email`, `apartment_type`, `apartment_area`, `property`) VALUES ('$kayttajatunnus','$salasana','$nimi','$kayntiosoite','$laskutusosoite','$puhelinnumero','$email','$asuntotyyppi','$asuntopintala','$tonttipintala')";
     
+    echo $insertquery;
+        
     if(mysqli_query($conn, $insertquery)){
                echo "<p>Lisäys onnistui</p>";
            }
