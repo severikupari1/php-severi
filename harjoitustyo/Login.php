@@ -1,4 +1,6 @@
-<?php session_start(); ?>
+<?php session_start(); require_once("db.inc"); ?>
+
+
 
 
 <!DOCTYPE html>
@@ -8,11 +10,17 @@
     <title>Kirjautuminen</title>
 </head>
 <body>
+    <?php 
     
+    
+    
+    ?>
+    
+    <h1>Rekisteröinti</h1>
     <form action="Login-check.php" method="get"> <br>
     Käyttäjätunnus: <input type="text" name="kayttajatunnus" value="">    <br>
     Salasana : <input type="text" name="salasana" value=""> <br>
-    Salasana uudestaan : <input type="text" name="salasana" value=""> <br>
+    Salasana uudestaan : <input type="text" name="" value=""> <br>
     Nimi : <input type="text" name="nimi" value=""> <br>
     Käyntiosoite:    <input type="text" name="kayntiosoite" value=""> <br>
     Laskutusosoite:    <input type="text" name="laskutusosoite" value=""> <br>
@@ -21,6 +29,13 @@
         <input type="submit" value="rekisteröi" name="rekisteroi"> <br>
     </form>
     
+    <h1>Sisäänkirjautuminen
+    </h1>
+    <form action="Login-check.php" method="get">
+    Käyttäjätunnnus: <input type="text" name="kayttajatunnuscheck" > <br>
+    Salasana : <input type="text" name="salasanacheck" ><br>
+    <input type="submit" value="Kirjaudu sisään" name="login">
+    </form>
     
 </body>
 </html>
