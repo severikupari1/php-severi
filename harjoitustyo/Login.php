@@ -12,7 +12,7 @@
 <body>
     <?php 
     
-    
+    //`apartment_type`, `apartment_area`, `property`
     
     ?>
     
@@ -26,6 +26,9 @@
     Laskutusosoite:    <input type="text" name="laskutusosoite" value=""> <br>
     Puhelinnumero:    <input type="text" name="puhelinnumero" value=""> <br>
     Sähköposti:    <input type="text" name="email" value=""> <br>
+    Asuntotyyppi: <input type="text" name="asuntotyyppi" >   <br>
+       Asuntosi pinta-ala: <input type="text" name="asuntopintala" >  <br>
+       Tonttisi pinta-ala <input type="text" name="tonttipintala" >  <br>
         <input type="submit" value="rekisteröi" name="rekisteroi"> <br>
     </form>
     

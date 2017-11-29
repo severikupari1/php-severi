@@ -38,6 +38,14 @@ require_once("db.inc");
 
 if($rekisteroi != ""){
     $inserquery = "INSERT INTO `customer`(`username`, `password`, `name`, `address`, `billing_address`, `phone_number`, `email`, `apartment_type`, `apartment_area`, `property`) VALUES ('$kayttajatunnus','$salasana','$nimi','$kayntiosoite','$laskutusosoite','$puhelinnumero','$email','$asuntotyyppi','$asuntopintala','$tonttipintala')";
+    
+    if(mysqli_query($conn, $insertquery)){
+               echo "<p>Lisäys onnistui</p>";
+           }
+           else 
+           {
+               echo "lisäys epaonnistui ";
+           }
 }
 
 ?>
