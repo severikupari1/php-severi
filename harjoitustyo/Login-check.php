@@ -24,16 +24,21 @@
     return $palautus;
 }
     
-    $kayttajatunnus = Tarkaste("kayttajatunnus",$conn);
-    echo $kayttajatunnus
-    
-        
-        
-        
-        kayttjatunnuscheck
-        salasanacheck
-        
-        
+
+        //ylempiform
+        $login = Tarkaste("login",$conn);
+        $kayttajatunnus = Tarkaste("kayttajatunnus",$conn);
+        $salasana = Tarkaste("salasana",$conn);
+        $nimi = Tarkaste("nimi",$conn);
+        $kayntiosoite = Tarkaste("kayntiosoite",$conn);
+        $laskutusosoite = Tarkaste("laskutusosoite",$conn);
+        $puhelinnumero = Tarkaste("puhelinnumero",$conn);
+        $email = Tarkaste("email",$conn);
+        $rekisteroi = Tarkaste("rekisteroi",$conn);
+        $salasanauudelleen = Tarkaste("salasanauudelleen",$conn);
+        //alempiform
+        $kayttajatunnuscheck = Tarkaste("kayttajatunnuscheck",$conn);
+        $salasanacheck = Tarkaste("salasanacheck",$conn);
     
     ?>
 </body>

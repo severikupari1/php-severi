@@ -20,7 +20,7 @@
     <form action="Login-check.php" method="get"> <br>
     Käyttäjätunnus: <input type="text" name="kayttajatunnus" value="">    <br>
     Salasana : <input type="text" name="salasana" value=""> <br>
-    Salasana uudestaan : <input type="text" name="" value=""> <br>
+    Salasana uudestaan : <input type="text" name="salasanauudelleen" value=""> <br>
     Nimi : <input type="text" name="nimi" value=""> <br>
     Käyntiosoite:    <input type="text" name="kayntiosoite" value=""> <br>
     Laskutusosoite:    <input type="text" name="laskutusosoite" value=""> <br>
