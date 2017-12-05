@@ -10,11 +10,11 @@ function Tulostaja($tuloste){
 }
 
 if(isset($_GET["lisaysonnistui"])){
-    echo "<p>lisays epäonnistui</p>";
+    echo "<p>rekisteröinti onnistui!</p>";
 }
 
 if(isset($_GET["lisaysepaonnistui"])){
-    
+    echo "<p>lisays epäonnistui</p>";
 }
 
 

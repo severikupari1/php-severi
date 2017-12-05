@@ -53,7 +53,7 @@ require_once("db.inc");
     //   header('Location: Login.php?lisaysepaonnistui');
      //header('Location: Login.php?lisaysonnistui');
     // header('Location: Login.php?kenttatyhja');
-    //  header('Location: Login.php?takaisin');
+    
 
 
 if($rekisteroi != ""){
@@ -68,7 +68,24 @@ if($rekisteroi != ""){
         $_SESSION["asiakastiedot"]["asuntopintala"] = $asuntopintala;
         $_SESSION["asiakastiedot"]["tonttipintala"] = $tonttipintala;
 
-        
+        if($kayttajatunnus != ""){
+            
+        $checkquery = "SELECT `username` FROM `customer` WHERE `username` = '$kayttajatunnus'";
+            $checkqueryisset = mysqli_query($conn,$checkquery);
+            
+            if(mysqli_num_rows($checkqueryisset)==0){
+                echo "onnistu";
+            }
+            else{
+                echo "Kayttajatunnus oli varattu";
+            }
+            
+            
+            
+        }
+        else{
+            echo "et antanut kaikkia kenttiä";
+        }
     
     
     
@@ -77,7 +94,7 @@ if($rekisteroi != ""){
 }
 else{//rekisteröi loppu
   
-    
+    //  header('Location: Login.php?takaisin');
     //muista uncommenttaa
 }
 
