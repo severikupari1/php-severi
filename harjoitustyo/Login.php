@@ -1,4 +1,7 @@
-<?php session_start(); require_once("db.inc"); ?>
+<?php session_start(); require_once("db.inc"); 
+
+
+?>
 
 
 
@@ -13,8 +16,15 @@
     <?php 
     
     //`apartment_type`, `apartment_area`, `property`
-     
+    if(isset($_GET["takaisin"])){
+        echo "Eipäs yritetä !";
+    }
+    
+    
+    
     ?>
+    
+    
     
     <h1>Rekisteröinti</h1>
     <form action="Login-check.php" method="get"> <br>
@@ -31,7 +41,17 @@
        Tonttisi pinta-ala <input type="text" name="tonttipintala" >  <br>
         <input type="submit" value="rekisteröi" name="rekisteroi"> <br>
     </form>
-    
+    <?php 
+        if(isset($_GET["salasanaeitasmaa"])){
+            echo "<p>Salasanat eivät täsmänneet! annappas ne uudelleen</p>";
+        }
+    if(isset($_GET["kenttatyhja"])){
+        echo "<p>Et antanut kaikkia kenttiä!</p>";
+    }
+    if(isset($_GET["kayttajatunnusvarattu"])){
+        echo "<p>käyttäjätunnus oli varattu!</p>";
+    }
+    ?>
     <h1>Sisäänkirjautuminen
     </h1>
     <form action="Login-check.php" method="get">
