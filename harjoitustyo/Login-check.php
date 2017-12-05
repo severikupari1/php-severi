@@ -75,6 +75,10 @@ if($rekisteroi != ""){
             
             if(mysqli_num_rows($checkqueryisset)==0){
                 echo "onnistu";
+                
+                //jos query ei löytänyt yhtään eli kayttajatunnus on vapaa
+                
+                
             }
             else{
                 echo "Kayttajatunnus oli varattu";
