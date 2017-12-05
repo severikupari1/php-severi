@@ -47,7 +47,7 @@ if($rekisteroi != ""){
         $_SESSION["asiakastiedot"]["asuntotyyppi"] = $asuntotyyppi;
         $_SESSION["asiakastiedot"]["asuntopintala"] = $asuntopintala;
         $_SESSION["asiakastiedot"]["tonttipintala"] = $tonttipintala;
-    
+
     
     if($kayttajatunnus != "" && $salasana != "" && $nimi != "" && $kayntiosoite !="" &&  $laskutusosoite != "" && $puhelinnumero != "" && $email != "" && $asuntotyyppi != "" && $asuntopintala != "" && $tonttipintala != ""){
 
@@ -70,11 +70,13 @@ if($rekisteroi != ""){
                 }
                 else{
                     if(mysqli_query($conn, $insertquery)){
-                       echo "<p>Lisäys onnistui</p>";
+                       //echo "<p>Lisäys onnistui</p>";
+                        header('Location: Login.php?lisaysonnistui');
                    }
                    else 
                    {
-                       echo "lisäys epaonnistui ";
+                       //echo "lisäys epaonnistui ";
+                       header('Location: Login.php?lisaysepaonnistui');
                    }           
                 }       
            }
