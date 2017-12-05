@@ -37,9 +37,28 @@ require_once("db.inc");
         $salasanacheck = Tarkaste("salasanacheck",$conn);
         $login = Tarkaste("login",$conn);
 
+
+//    if($kayttajatunnus != "" && $salasana != "" && $nimi != "" && $kayntiosoite !="" &&  $laskutusosoite != "" && $puhelinnumero != "" && $email != "" && $asuntotyyppi != "" && $asuntopintala != "" && $tonttipintala != "")
+    
+//    if(strcmp($salasana,$salasanauudelleen) !== 0 ){
+//            
+//            
+//            echo "Salasanat eivät täsmänneet";
+//           // header('Location: Login.php?salasanaeitasmaa');  
+//        }
+    
+//    $insertquery = "INSERT INTO `customer`(`username`, `password`, `name`, `address`, `billing_address`, `phone_number`, `email`, `apartment_type`, `apartment_area`, `property`) VALUES ('$kayttajatunnus','$salasana','$nimi','$kayntiosoite','$laskutusosoite','$puhelinnumero','$email','$asuntotyyppi','$asuntopintala','$tonttipintala')";
+//    
+    //header('Location: Login.php?kayttajatunnusvarattu');
+    //   header('Location: Login.php?lisaysepaonnistui');
+     //header('Location: Login.php?lisaysonnistui');
+    // header('Location: Login.php?kenttatyhja');
+    //  header('Location: Login.php?takaisin');
+
+
 if($rekisteroi != ""){
     // TOIMII!
-    $_SESSION["asiakastiedot"]["kayttajatunnus"] = $kayttajatunnus;
+        $_SESSION["asiakastiedot"]["kayttajatunnus"] = $kayttajatunnus;
         $_SESSION["asiakastiedot"]["nimi"] = $nimi;
         $_SESSION["asiakastiedot"]["kayntiosoite"] = $kayntiosoite;
         $_SESSION["asiakastiedot"]["laskutusosoite"] = $laskutusosoite;
@@ -49,55 +68,18 @@ if($rekisteroi != ""){
         $_SESSION["asiakastiedot"]["asuntopintala"] = $asuntopintala;
         $_SESSION["asiakastiedot"]["tonttipintala"] = $tonttipintala;
 
-//    if($kayttajatunnus != "" && $salasana != "" && $nimi != "" && $kayntiosoite !="" &&  $laskutusosoite != "" && $puhelinnumero != "" && $email != "" && $asuntotyyppi != "" && $asuntopintala != "" && $tonttipintala != "")
-    
-    
-    
-    if($kayttajatunnus != "" && $salasana != "" && $nimi != "" && $kayntiosoite !="" &&  $laskutusosoite != "" && $puhelinnumero != "" && $email != "" && $asuntotyyppi != "" && $asuntopintala != "" && $tonttipintala != ""){
-
-        $checkquery = "SELECT `username` FROM `customer` WHERE `username` = '$kayttajatunnus'";
         
-        if(strcmp($salasana,$salasanauudelleen) !== 0 ){
-            
-            
-            echo "Salasanat eivät täsmänneet";
-           // header('Location: Login.php?salasanaeitasmaa');  
-        }
-        else{
-           $insertquery = "INSERT INTO `customer`(`username`, `password`, `name`, `address`, `billing_address`, `phone_number`, `email`, `apartment_type`, `apartment_area`, `property`) VALUES ('$kayttajatunnus','$salasana','$nimi','$kayntiosoite','$laskutusosoite','$puhelinnumero','$email','$asuntotyyppi','$asuntopintala','$tonttipintala')";
     
-    // Debugging echo $insertquery;
-    echo $insertquery;
-                if(mysqli_query($conn, $checkquery)){ //tarksitus onko kayttajatunnus
-                    echo "Kayttajatunnus on varattu!";
-                    //header('Location: Login.php?kayttajatunnusvarattu');
-                }
-                else{
-                    if(mysqli_query($conn, $insertquery)){
-                       echo "<p>Lisäys onnistui</p>";
-                        //header('Location: Login.php?lisaysonnistui');
-                   }
-                   else 
-                   {
-                       echo "lisäys epaonnistui ";
-                    //   header('Location: Login.php?lisaysepaonnistui');
-                   }      
-                    
-                }       
-           }
-        }//Check jos kaikki on annettu!
-    else   
-    {
-        echo "Et antanut kaikkia kenttia!";
-       // header('Location: Login.php?kenttatyhja');
-    } 
+    
+    
+    
+
 }
-else{
-  //  header('Location: Login.php?takaisin');
+else{//rekisteröi loppu
+  
     
     //muista uncommenttaa
 }
-
 
 
 
