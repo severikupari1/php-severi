@@ -13,7 +13,7 @@
     <?php 
     
     //`apartment_type`, `apartment_area`, `property`
-    
+     
     ?>
     
     <h1>Rekisteröinti</h1>

@@ -37,17 +37,38 @@ require_once("db.inc");
         $salasanacheck = Tarkaste("salasanacheck",$conn);
 
 if($rekisteroi != ""){
-    $insertquery = "INSERT INTO `customer`(`username`, `password`, `name`, `address`, `billing_address`, `phone_number`, `email`, `apartment_type`, `apartment_area`, `property`) VALUES ('$kayttajatunnus','$salasana','$nimi','$kayntiosoite','$laskutusosoite','$puhelinnumero','$email','$asuntotyyppi','$asuntopintala','$tonttipintala')";
-    
-    echo $insertquery;
+    // TOIMII!
+    if($kayttajatunnus != "" && $salasana != "" && $nimi != "" && $kayntiosoite !="" &&  $laskutusosoite != "" && $puhelinnumero != "" && $email != "" && $asuntotyyppi != "" && $asuntopintala != "" && $tonttipintala != ""){
         
-    if(mysqli_query($conn, $insertquery)){
+        
+        $checkquery = "SELECT `username` FROM `customer` WHERE `username` = '$kayttajatunnus' ";
+        
+        
+        $insertquery = "INSERT INTO `customer`(`username`, `password`, `name`, `address`, `billing_address`, `phone_number`, `email`, `apartment_type`, `apartment_area`, `property`) VALUES ('$kayttajatunnus','$salasana','$nimi','$kayntiosoite','$laskutusosoite','$puhelinnumero','$email','$asuntotyyppi','$asuntopintala','$tonttipintala')";
+    
+    // Debugging echo $insertquery;
+    
+        if(mysqli_query($conn, $checkquery)){
+            if(mysqli_query($conn, $insertquery)){
                echo "<p>Lisäys onnistui</p>";
            }
            else 
            {
                echo "lisäys epaonnistui ";
            }
+        }
+          
+        
+        
+        
+        
+        
+        
+        
+        }//Check jos kaikki on annettu!
+    else    {
+        echo "Et antanut kaikkia kenttia!";
+    } 
 }
 
 ?>
