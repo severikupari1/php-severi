@@ -38,20 +38,19 @@ require_once("db.inc");
 
 if($rekisteroi != ""){
     // TOIMII!
+    $_SESSION["asiakastiedot"]["kayttajatunnus"] = $kayttajatunnus;
+        $_SESSION["asiakastiedot"]["nimi"] = $nimi;
+        $_SESSION["asiakastiedot"]["kayntiosoite"] = $kayntiosoite;
+        $_SESSION["asiakastiedot"]["laskutusosoite"] = $laskutusosoite;
+        $_SESSION["asiakastiedot"]["puhelinnumero"] = $puhelinnumero;
+        $_SESSION["asiakastiedot"]["email"] = $email;
+        $_SESSION["asiakastiedot"]["asuntotyyppi"] = $asuntotyyppi;
+        $_SESSION["asiakastiedot"]["asuntopintala"] = $asuntopintala;
+        $_SESSION["asiakastiedot"]["tonttipintala"] = $tonttipintala;
+    
+    
     if($kayttajatunnus != "" && $salasana != "" && $nimi != "" && $kayntiosoite !="" &&  $laskutusosoite != "" && $puhelinnumero != "" && $email != "" && $asuntotyyppi != "" && $asuntopintala != "" && $tonttipintala != ""){
-        
-        
-        $_SESSION["asiakastiedot"]["kayttajatunnus"] = $kayttajatunnus;
-        $_SESSION["asiakastiedot"]["kayttajatunnus"] = $kayttajatunnus;
-        $_SESSION["asiakastiedot"]["kayttajatunnus"] = $kayttajatunnus;
-        $_SESSION["asiakastiedot"]["kayttajatunnus"] = $kayttajatunnus;
-        $_SESSION["asiakastiedot"]["kayttajatunnus"] = $kayttajatunnus;
-        $_SESSION["asiakastiedot"]["kayttajatunnus"] = $kayttajatunnus;
-        $_SESSION["asiakastiedot"]["kayttajatunnus"] = $kayttajatunnus;
-        $_SESSION["asiakastiedot"]["kayttajatunnus"] = $kayttajatunnus;
-        
-        
-        
+
         $checkquery = "SELECT `username` FROM `customer` WHERE `username` = '$kayttajatunnus'";
         
         if(strcmp($salasana,$salasanauudelleen) !== 0 ){
