@@ -17,7 +17,7 @@ require_once("db.inc");
     return $palautus;
 }
         //ylempiform
-        $login = Tarkaste("login",$conn);
+        
         $kayttajatunnus = Tarkaste("kayttajatunnus",$conn);
         $salasana = Tarkaste("salasana",$conn);
         $salasanauudelleen = Tarkaste("salasanauudelleen",$conn);
@@ -35,6 +35,7 @@ require_once("db.inc");
         //alempiform
         $kayttajatunnuscheck = Tarkaste("kayttajatunnuscheck",$conn);
         $salasanacheck = Tarkaste("salasanacheck",$conn);
+        $login = Tarkaste("login",$conn);
 
 if($rekisteroi != ""){
     // TOIMII!
@@ -48,6 +49,9 @@ if($rekisteroi != ""){
         $_SESSION["asiakastiedot"]["asuntopintala"] = $asuntopintala;
         $_SESSION["asiakastiedot"]["tonttipintala"] = $tonttipintala;
 
+//    if($kayttajatunnus != "" && $salasana != "" && $nimi != "" && $kayntiosoite !="" &&  $laskutusosoite != "" && $puhelinnumero != "" && $email != "" && $asuntotyyppi != "" && $asuntopintala != "" && $tonttipintala != "")
+    
+    
     
     if($kayttajatunnus != "" && $salasana != "" && $nimi != "" && $kayntiosoite !="" &&  $laskutusosoite != "" && $puhelinnumero != "" && $email != "" && $asuntotyyppi != "" && $asuntopintala != "" && $tonttipintala != ""){
 
@@ -57,34 +61,35 @@ if($rekisteroi != ""){
             
             
             echo "Salasanat eivät täsmänneet";
-            header('Location: Login.php?salasanaeitasmaa');  
+           // header('Location: Login.php?salasanaeitasmaa');  
         }
         else{
            $insertquery = "INSERT INTO `customer`(`username`, `password`, `name`, `address`, `billing_address`, `phone_number`, `email`, `apartment_type`, `apartment_area`, `property`) VALUES ('$kayttajatunnus','$salasana','$nimi','$kayntiosoite','$laskutusosoite','$puhelinnumero','$email','$asuntotyyppi','$asuntopintala','$tonttipintala')";
     
     // Debugging echo $insertquery;
-    
+    echo $insertquery;
                 if(mysqli_query($conn, $checkquery)){ //tarksitus onko kayttajatunnus
-                    //echo "Kayttajatunnus on varattu!";
-                    header('Location: Login.php?kayttajatunnusvarattu');
+                    echo "Kayttajatunnus on varattu!";
+                    //header('Location: Login.php?kayttajatunnusvarattu');
                 }
                 else{
                     if(mysqli_query($conn, $insertquery)){
-                       //echo "<p>Lisäys onnistui</p>";
-                        header('Location: Login.php?lisaysonnistui');
+                       echo "<p>Lisäys onnistui</p>";
+                        //header('Location: Login.php?lisaysonnistui');
                    }
                    else 
                    {
-                       //echo "lisäys epaonnistui ";
-                       header('Location: Login.php?lisaysepaonnistui');
-                   }           
+                       echo "lisäys epaonnistui ";
+                    //   header('Location: Login.php?lisaysepaonnistui');
+                   }      
+                    
                 }       
            }
         }//Check jos kaikki on annettu!
     else   
     {
-       // echo "Et antanut kaikkia kenttia!";
-        header('Location: Login.php?kenttatyhja');
+        echo "Et antanut kaikkia kenttia!";
+       // header('Location: Login.php?kenttatyhja');
     } 
 }
 else{
@@ -92,6 +97,9 @@ else{
     
     //muista uncommenttaa
 }
+
+
+
 
 ?>
 <!DOCTYPE html>

@@ -9,6 +9,16 @@ function Tulostaja($tuloste){
     
 }
 
+if(isset($_GET["lisaysonnistui"])){
+    echo "<p>lisays epäonnistui</p>";
+}
+
+if(isset($_GET["lisaysepaonnistui"])){
+    
+}
+
+
+
 //print_r($_SESSION);
 ?>
 
