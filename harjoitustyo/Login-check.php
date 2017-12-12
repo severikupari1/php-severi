@@ -135,7 +135,25 @@ else{//rekisteröi loppu
     //  header('Location: Login.php?takaisin');
 }
 
-
+if($login != ""){
+	
+	
+	$loginquery = "SELECT `username`,`password` FROM `customer` WHERE `username` = '$kayttajatunnuscheck' AND `password` = '$salasanacheck'";
+	$logincheck = mysqli_query($conn,$loginquery);
+	//echo $loginquery;
+	
+	//echo mysqli_num_rows($logincheck);
+	if(mysqli_num_rows($logincheck)==1){
+		//echo "kirjautuminen onnistui!";
+		$_SESSION["kirjautuminen"] = "ok";
+		
+	}
+	else{
+		//echo "käyttäjätunnus tai salasana väärin";		
+			header('Location: Login.php?kirjautuminenfailas');
+	}
+	
+}
 
 ?>
 <!DOCTYPE html>
