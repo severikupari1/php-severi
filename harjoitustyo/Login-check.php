@@ -83,8 +83,8 @@ if($rekisteroi != ""){
 				 if(strcmp($salasana,$salasanauudelleen) !== 0 ){
             
 
-					echo "Salasanat eivät täsmänneet";
-				   // header('Location: Login.php?salasanaeitasmaa');  
+					//echo "Salasanat eivät täsmänneet";
+				    header('Location: Login.php?salasanaeitasmaa');  
 				}
 				else{
 					//inserttaa kantaan
@@ -94,7 +94,7 @@ if($rekisteroi != ""){
 						if(mysqli_query($conn,$insertquery)){
 							//echo "Onnistu lisäys";
 							//lopuksi!
-               // header('Location: Login.php?lisaysonnistui');
+                header('Location: Login.php?lisaysonnistui');
 						}
 						else{
 							//echo "feilas lisays";
@@ -111,8 +111,8 @@ if($rekisteroi != ""){
                 
             }
             else{
-                echo "Kayttajatunnus oli varattu";
-				//header('Location: Login.php?kayttajatunnusvarattu');
+                //echo "Kayttajatunnus oli varattu";
+				header('Location: Login.php?kayttajatunnusvarattu');
             }
             
             
@@ -123,7 +123,8 @@ if($rekisteroi != ""){
 	
 	
         else{
-            echo "et antanut kaikkia kenttiä";
+           // echo "et antanut kaikkia kenttiä";
+			 header('Location: Login.php?kenttatyhja');
         }
     
     
@@ -156,7 +157,7 @@ if($login != ""){
 }
 
 
-if($rekisteroi != "" or	$login){
+if($rekisteroi != "" or	$login != ""){
 	
 }
 else{
