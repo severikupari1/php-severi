@@ -62,6 +62,7 @@ if(isset($_GET["lisaysepaonnistui"])){
     if(isset($_GET["kayttajatunnusvarattu"])){
         echo "<p>käyttäjätunnus oli varattu!</p>";
     }
+	
     ?>
     <h1>Sisäänkirjautuminen
     </h1>
@@ -70,6 +71,9 @@ if(isset($_GET["lisaysepaonnistui"])){
     Salasana : <input type="text" name="salasanacheck" ><br>
     <input type="submit" value="Kirjaudu sisään" name="login">
     </form>
+    <?php if(isset($_GET["kirjautuminenfeilas"])){
+        echo "<p>käyttäjätunnus tai salasana väärin!</p>";
+    } ?>
     
 </body>
 </html>

@@ -146,13 +146,21 @@ if($login != ""){
 	if(mysqli_num_rows($logincheck)==1){
 		//echo "kirjautuminen onnistui!";
 		$_SESSION["kirjautuminen"] = "ok";
-		
+		header('Location: Homepage.php');
 	}
 	else{
 		//echo "käyttäjätunnus tai salasana väärin";		
-			header('Location: Login.php?kirjautuminenfailas');
+			header('Location: Login.php?kirjautuminenfeilas');
 	}
 	
+}
+
+
+if($rekisteroi != "" or	$login){
+	
+}
+else{
+	 header('Location: Login.php?takaisin');
 }
 
 ?>
