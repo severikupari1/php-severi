@@ -147,6 +147,7 @@ if($login != ""){
 	if(mysqli_num_rows($logincheck)==1){
 		//echo "kirjautuminen onnistui!";
 		$_SESSION["kirjautuminen"] = "ok";
+		$_SESSION["kayttajatiedot"]["kayttajatunnus"] = $kayttajatunnuscheck;
 		header('Location: Homepage.php');
 	}
 	else{
@@ -161,7 +162,7 @@ if($rekisteroi != "" or	$login != ""){
 	
 }
 else{
-	 header('Location: Login.php?takaisin');
+	// header('Location: Login.php?takaisin');
 }
 
 ?>
