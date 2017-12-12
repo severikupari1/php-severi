@@ -46,12 +46,15 @@ require_once("db.inc");
 //            echo "Salasanat eivät täsmänneet";
 //           // header('Location: Login.php?salasanaeitasmaa');  
 //        }
+//		else{
+//			//inserttaa kantaan
+//		}
     
 //    $insertquery = "INSERT INTO `customer`(`username`, `password`, `name`, `address`, `billing_address`, `phone_number`, `email`, `apartment_type`, `apartment_area`, `property`) VALUES ('$kayttajatunnus','$salasana','$nimi','$kayntiosoite','$laskutusosoite','$puhelinnumero','$email','$asuntotyyppi','$asuntopintala','$tonttipintala')";
 //    
-    //header('Location: Login.php?kayttajatunnusvarattu');
+    
     //   header('Location: Login.php?lisaysepaonnistui');
-     //header('Location: Login.php?lisaysonnistui');
+     
     // header('Location: Login.php?kenttatyhja');
     
 
@@ -74,19 +77,55 @@ if($rekisteroi != ""){
             $checkqueryisset = mysqli_query($conn,$checkquery);
             
             if(mysqli_num_rows($checkqueryisset)==0){
-                echo "onnistu";
+                //echo "onnistu";
                 
                 //jos query ei löytänyt yhtään eli kayttajatunnus on vapaa
-                
+				 if(strcmp($salasana,$salasanauudelleen) !== 0 ){
+            
+
+					echo "Salasanat eivät täsmänneet";
+				   // header('Location: Login.php?salasanaeitasmaa');  
+				}
+				else{
+					//inserttaa kantaan
+					if($kayttajatunnus != "" && $salasana != "" && $nimi != "" && $kayntiosoite !="" &&  $laskutusosoite != "" && $puhelinnumero != "" && $email != "" && $asuntotyyppi != "" && $asuntopintala != "" && $tonttipintala != ""){
+						$insertquery = "INSERT INTO `customer`(`username`, `password`, `name`, `address`, `billing_address`, `phone_number`, `email`, `apartment_type`, `apartment_area`, `property`) VALUES ('$kayttajatunnus','$salasana','$nimi','$kayntiosoite','$laskutusosoite','$puhelinnumero','$email','$asuntotyyppi','$asuntopintala','$tonttipintala')";
+						
+						if(mysqli_query($conn,$insertquery)){
+							//echo "Onnistu lisäys";
+							//lopuksi!
+                header('Location: Login.php?lisaysonnistui');
+						}
+						else{
+							//echo "feilas lisays";
+							header('Location: Login.php?lisaysepaonnistui');
+						}
+						
+						
+						
+						
+						
+					}
+					else{
+						//jos ei annettu kaikkia kenttiä
+					}
+					
+				}
+				
                 
             }
             else{
                 echo "Kayttajatunnus oli varattu";
+				//header('Location: Login.php?kayttajatunnusvarattu');
             }
             
             
             
         }
+	
+	
+	
+	
         else{
             echo "et antanut kaikkia kenttiä";
         }
