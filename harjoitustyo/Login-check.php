@@ -71,7 +71,7 @@ if($rekisteroi != ""){
         $_SESSION["asiakastiedot"]["asuntopintala"] = $asuntopintala;
         $_SESSION["asiakastiedot"]["tonttipintala"] = $tonttipintala;
 
-        if($kayttajatunnus != ""){
+        if($kayttajatunnus != "" && $salasana != "" && $nimi != "" && $kayntiosoite !="" &&  $laskutusosoite != "" && $puhelinnumero != "" && $email != "" && $asuntotyyppi != "" && $asuntopintala != "" && $tonttipintala != ""){
             
         $checkquery = "SELECT `username` FROM `customer` WHERE `username` = '$kayttajatunnus'";
             $checkqueryisset = mysqli_query($conn,$checkquery);
@@ -94,17 +94,13 @@ if($rekisteroi != ""){
 						if(mysqli_query($conn,$insertquery)){
 							//echo "Onnistu lisäys";
 							//lopuksi!
-                header('Location: Login.php?lisaysonnistui');
+               // header('Location: Login.php?lisaysonnistui');
 						}
 						else{
 							//echo "feilas lisays";
-							header('Location: Login.php?lisaysepaonnistui');
+							//header('Location: Login.php?lisaysepaonnistui');
 						}
-						
-						
-						
-						
-						
+		
 					}
 					else{
 						//jos ei annettu kaikkia kenttiä
@@ -136,9 +132,7 @@ if($rekisteroi != ""){
 
 }
 else{//rekisteröi loppu
-  
     //  header('Location: Login.php?takaisin');
-    //muista uncommenttaa
 }
 
 
