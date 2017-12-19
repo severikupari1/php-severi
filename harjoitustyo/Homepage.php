@@ -10,6 +10,7 @@ require_once("db.inc");
 
 
 <?php 
+if(isset($_SESSION["kayttajatiedot"])){
 
 $kayttajatunnus = array();
 $kayttajatunnus =$_SESSION["kayttajatiedot"]["kayttajatunnus"];
@@ -57,7 +58,7 @@ $kayttajatiedothaku = "SELECT `key_id`,`name`,`address`,`billing_address`,`phone
 		
   			}
 		} 
-            
+    }        
 //	SELECT `key_id`,`name`,`address`,`billing_address`,`phone_number`,`email`,`apartment_type`,`apartment_area`,`property` FROM `customer` WHERE 1
 
 var_dump($_SESSION);
