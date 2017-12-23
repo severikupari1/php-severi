@@ -4,12 +4,51 @@ if(!isset($_SESSION["kirjautuminen"])){
 } 
 require_once("db.inc"); 
 
+function Tarkaste($muuttuja,$conn){
+       
+   if(isset($_GET[$muuttuja]))
+     {
+       
+    $palautus= mysqli_real_escape_string($conn,$_GET[$muuttuja]);    
+    }
+    else
+    {
+           $palautus = "";
+    }
+    return $palautus;
+}
 
 
 ?>
 
 
 <?php 
+
+$muutos = Tarkaste("muutos",$conn);
+
+if($muutos != ""){
+	
+        $nimi = Tarkaste("nimi",$conn);
+        $kayntiosoite = Tarkaste("kayntiosoite",$conn);
+        $laskutusosoite = Tarkaste("laskutusosoite",$conn);
+        $puhelinnumero = Tarkaste("puhelinnumero",$conn);
+        $email = Tarkaste("email",$conn);
+        $rekisteroi = Tarkaste("rekisteroi",$conn);
+        $salasanauudelleen = Tarkaste("salasanauudelleen",$conn);
+        $asuntotyyppi= Tarkaste("asuntotyyppi",$conn);
+        $asuntopintala   = Tarkaste("asuntopintala",$conn);
+        $tonttipintala = Tarkaste("tonttipintala",$conn);
+	
+	
+//	UPDATE `customer` SET `key_id`=[value-1],`username`=[value-2],`password`=[value-3],`name`=[value-4],`address`=[value-5],`billing_address`=[value-6],`phone_number`=[value-7],`email`=[value-8],`apartment_type`=[value-9],`apartment_area`=[value-10],`property`=[value-11] WHERE 1
+	
+	$updatequery = "UPDATE `customer` SET `name`='$nimi',`address`='$kayntiosoite',`billing_address`='$laskutusosoite',`phone_number`='$puhelinnumero',`email`='$email',`apartment_type`='$asuntotyyppi',`apartment_area`='$asuntopintala',`property`='$tonttipintala' WHERE 1";
+	
+}
+
+
+
+
 if(isset($_SESSION["kayttajatiedot"])){
 
 $kayttajatunnus = array();
@@ -91,8 +130,8 @@ $kayttajatiedothaku = "SELECT `key_id`,`name`,`address`,`billing_address`,`phone
         <br>
 		
 		Asunnon pinta-ala : <input type="text" name="" value=""><br>
-		Tonttisi koko<input type="text" name="" value=""><br>
-		
+		Tonttisi koko : <input type="text" name="" value=""><br>
+		<input type="submit" value="Muuta tietojasi" name="muutos">
 	</form>
 	
 </body>
