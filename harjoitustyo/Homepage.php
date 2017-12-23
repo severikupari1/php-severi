@@ -69,6 +69,6 @@ $kayttajatiedothaku = "SELECT `key_id`,`name`,`address`,`billing_address`,`phone
 	<title>Päänäyttö </title>
 </head>
 <body>
-		<a href="muutos.php"></a>
+		<a href="muutos.php">Hei <?php echo $_SESSION["kayttajatiedot"]["name"]; ?>   pääset tästä muuttamaan tietojasi</a>
 </body>
 </html>

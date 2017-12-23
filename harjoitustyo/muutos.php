@@ -25,6 +25,14 @@ function Tulostaja($muuttuja){
 	echo $testiarray["$muuttuja"];
 }
 
+function Asuntotyyppi($tarkastettava){
+	if(isset($_SESSION["kayttajatiedot"]["apartment_type"])){
+	if($_SESSION["kayttajatiedot"]["apartment_type"] == "$tarkastettava"){echo "selected";}
+}
+}
+
+
+
 
 ?>
 
@@ -34,6 +42,10 @@ function Tulostaja($muuttuja){
 $muutos = Tarkaste("muutos",$conn);
 
 if($muutos != ""){
+	
+
+	
+	
 	
         $nimi = Tarkaste("nimi",$conn);
         $kayntiosoite = Tarkaste("kayntiosoite",$conn);
@@ -50,8 +62,9 @@ if($muutos != ""){
 	
 //	UPDATE `customer` SET `key_id`=[value-1],`username`=[value-2],`password`=[value-3],`name`=[value-4],`address`=[value-5],`billing_address`=[value-6],`phone_number`=[value-7],`email`=[value-8],`apartment_type`=[value-9],`apartment_area`=[value-10],`property`=[value-11] WHERE 1
 	
-	$updatequery = "UPDATE `customer` SET `name`='$nimi',`address`='$kayntiosoite',`billing_address`='$laskutusosoite',`phone_number`='$puhelinnumero',`email`='$email',`apartment_type`='$asuntotyyppi',`apartment_area`='$asuntopintala',`property`='$tonttipintala' WHERE 'key_id' = '$keyid'";
+	$updatequery = "UPDATE `customer` SET `name`='$nimi',`address`='$kayntiosoite',`billing_address`='$laskutusosoite',`phone_number`='$puhelinnumero',`email`='$email',`apartment_type`='$asuntotyyppi',`apartment_area`='$asuntopintala',`property`='$tonttipintala' WHERE `customer`.`key_id` = $keyid";
 	
+	//echo $updatequery;
 	
 	
 	if(!mysqli_query($conn, $updatequery)){
@@ -61,12 +74,7 @@ if($muutos != ""){
 		echo "onnistu";
 	}
 	
-}
-
-
-
-
-if(isset($_SESSION["kayttajatiedot"])){
+	if(isset($_SESSION["kayttajatiedot"])){
 
 $kayttajatunnus = array();
 $kayttajatunnus =$_SESSION["kayttajatiedot"]["kayttajatunnus"];
@@ -88,7 +96,7 @@ $kayttajatiedothaku = "SELECT `key_id`,`name`,`address`,`billing_address`,`phone
 	else
 	{
         
-		
+		echo "haetaan kannasta";
 		while ($rivi = mysqli_fetch_array($tulos, MYSQL_ASSOC)) { 
 			
 			$_SESSION["kayttajatiedot"]["key_id"] = $rivi["key_id"];
@@ -113,7 +121,15 @@ $kayttajatiedothaku = "SELECT `key_id`,`name`,`address`,`billing_address`,`phone
   			}
 		} 
     }
+	
+}
+
+
+
 ?>
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -137,9 +153,10 @@ rekisteroi
 
 -->
 <?php 
-	$kayttajatiedot = array();
-	$kayttajatiedot = $_SESSION["kayttajatiedot"];
-	print_r($_SESSION);
+	//var_dump($_SESSION["kayttajatiedot"]);
+	//print_r($_SESSION);
+	
+	
 	?>
 	<form action="muutos.php" method="get">
 		
@@ -151,15 +168,11 @@ rekisteroi
 		
 		Asuntotyyppi : <select name="asuntotyyppi" id="">
         	<option value=""></option>
-        	<option value="omakotitalo" <?php if(isset($_SESSION["kayttajatiedot"]["apartment_type"])){
-	if($_SESSION["kayttajatiedot"]["apartment_type"] == "omakotitalo"){echo "selected";}
-} ?> >omakotitalo</option>
-        	<option value="vapaa-ajan-asunto" <?php if(isset($_SESSION["kayttajatiedot"]["apartment_type"])){
-	if($_SESSION["kayttajatiedot"]["apartment_type"] == "vapaa-ajan-asunto"){echo "selected";}
-} ?> >vapaa-ajan-asunto</option>
-        	<option value="maatila" <?php if(isset($_SESSION["kayttajatiedot"]["apartment_type"])){
-	if($_SESSION["kayttajatiedot"]["apartment_type"] == "maatila"){echo "selected";}
-} ?> >maatila</option>
+        	<option value="omakotitalo" <?php Asuntotyyppi("omakotitalo");
+ ?> >omakotitalo</option>
+        	<option value="vapaa-ajan-asunto" <?php Asuntotyyppi("vapaa-ajan-asunto"); ?> >vapaa-ajan-asunto</option>
+        	<option value="maatila" <?php Asuntotyyppi("maatila");
+					 ?> >maatila</option>
         </select>
         <br>
 		
@@ -167,6 +180,6 @@ rekisteroi
 		Tonttisi koko : <input type="text" name="tonttipintala" value="<?php Tulostaja("property") ?>"><br>
 		<input type="submit" value="Muuta tietojasi" name="muutos">
 	</form>
-	
+	<a href="Homepage.php">Takaisin päänäyttöön</a>
 </body>
 </html>

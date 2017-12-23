@@ -37,6 +37,7 @@ var_dump($_SESSION);
     ?>
 
     <h1>Rekisteröinti</h1>
+
     <form action="Login-check.php" method="get"> <br>
     Käyttäjätunnus: <input type="text" name="kayttajatunnus" value="<?php Tulostaja("kayttajatunnus"); ?>">    <br>
     Salasana : <input type="text" name="salasana" value="<?php ?>"> <br>
