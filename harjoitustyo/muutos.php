@@ -56,19 +56,31 @@ $kayttajatiedothaku = "SELECT `key_id`,`name`,`address`,`billing_address`,`phone
 		
   			}
 		} 
-    }        
-//	SELECT `key_id`,`name`,`address`,`billing_address`,`phone_number`,`email`,`apartment_type`,`apartment_area`,`property` FROM `customer` WHERE 1
-
-//var_dump($_SESSION);
+    }
 ?>
-
+>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Päänäyttö </title>
+	<title>Käyttäjäntietojen muutos</title>
 </head>
 <body>
-		<a href="muutos.php"></a>
+	<h1>Tietosi</h1>
+	
+	<form action="muutos.<p>You can use the mark tag to <mark>highlight</mark> text.</p>
+hp" method="get">
+		
+		Nimesi : <input type="text" name="" value=""><br>
+		Osoite : <input type="text" name="" value=""><br>
+		Laskutusosoite : <input type="text" name="" value=""><br>
+		Puhelinnumero : <input type="text" name="" value=""><br>
+		Sähköposti : <input type="text" name="" value=""><br>
+		Asuntotyyppisi : <input type="text" name="" value=""><br>
+		Asunnon pinta-ala : <input type="text" name="" value=""><br>
+		Tonttisi koko<input type="text" name="" value=""><br>
+		
+	</form>
+	
 </body>
 </html>
