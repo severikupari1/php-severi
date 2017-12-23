@@ -3,10 +3,9 @@
 function Tulostaja($tuloste){
     if(isset($_SESSION["asiakastiedot"])){
         $tulostearray = array();
-       $tulostearray =  $_SESSION["asiakastiedot"];
+        $tulostearray =  $_SESSION["asiakastiedot"];
         echo $tulostearray["$tuloste"];
     }
-    
 }
 
 if(isset($_GET["lisaysonnistui"])){
@@ -17,7 +16,7 @@ if(isset($_GET["lisaysepaonnistui"])){
     echo "<p>lisays epäonnistui</p>";
 }
 
-
+var_dump($_SESSION);
 
 //print_r($_SESSION);
 ?>
@@ -47,7 +46,25 @@ if(isset($_GET["lisaysepaonnistui"])){
     Laskutusosoite:    <input type="text" name="laskutusosoite" value="<?php Tulostaja("laskutusosoite"); ?>"> <br>
     Puhelinnumero:    <input type="text" name="puhelinnumero" value="<?php Tulostaja("puhelinnumero"); ?>"> <br>
     Sähköposti:    <input type="text" name="email" value="<?php Tulostaja("email"); ?>"> <br>
-    Asuntotyyppi: <input type="text" name="asuntotyyppi"  value="<?php Tulostaja("asuntotyyppi"); ?>">   <br>
+    
+<!--    Asuntotyyppi: <input type="text" name="asuntotyyppi"  value="<?php // Tulostaja("asuntotyyppi"); ?>">-->
+      
+        Asuntotyyppi : <select name="asuntotyyppi" id="">
+        	<option value=""></option>
+        	<option value="omakotitalo" <?php if(isset($_SESSION["asiakastiedot"]["asuntotyyppi"])){
+	if($_SESSION["asiakastiedot"]["asuntotyyppi"] == "omakotitalo"){echo "selected";}
+} ?> >omakotitalo</option>
+        	<option value="vapaa-ajan-asunto" <?php if(isset($_SESSION["asiakastiedot"]["asuntotyyppi"])){
+	if($_SESSION["asiakastiedot"]["asuntotyyppi"] == "vapaa-ajan-asunto"){echo "selected";}
+} ?> >vapaa-ajan-asunto</option>
+        	<option value="maatila" <?php if(isset($_SESSION["asiakastiedot"]["asuntotyyppi"])){
+	if($_SESSION["asiakastiedot"]["asuntotyyppi"] == "maatila"){echo "selected";}
+} ?> >maatila</option>
+        </select>
+         
+            
+               
+                     <br>
        Asuntosi pinta-ala: <input type="text" name="asuntopintala"  value="<?php Tulostaja("asuntopintala"); ?>">  <br>
        Tonttisi pinta-ala <input type="text" name="tonttipintala"  value="<?php Tulostaja("tonttipintala");  ?>">  <br>
         <input type="submit" value="rekisteröi" name="rekisteroi" > <br>

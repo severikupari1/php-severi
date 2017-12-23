@@ -58,7 +58,7 @@ $kayttajatiedothaku = "SELECT `key_id`,`name`,`address`,`billing_address`,`phone
 		} 
     }
 ?>
->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
