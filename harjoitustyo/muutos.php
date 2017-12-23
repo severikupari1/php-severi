@@ -18,6 +18,13 @@ function Tarkaste($muuttuja,$conn){
     return $palautus;
 }
 
+function Tulostaja($muuttuja){
+	$testiarray = array();
+	$testiarray = $_SESSION["kayttajatiedot"];
+	
+	echo $testiarray["$muuttuja"];
+}
+
 
 ?>
 
@@ -38,11 +45,21 @@ if($muutos != ""){
         $asuntotyyppi= Tarkaste("asuntotyyppi",$conn);
         $asuntopintala   = Tarkaste("asuntopintala",$conn);
         $tonttipintala = Tarkaste("tonttipintala",$conn);
-	
+	$keyid = array();
+	$keyid = $_SESSION["kayttajatiedot"]["key_id"];
 	
 //	UPDATE `customer` SET `key_id`=[value-1],`username`=[value-2],`password`=[value-3],`name`=[value-4],`address`=[value-5],`billing_address`=[value-6],`phone_number`=[value-7],`email`=[value-8],`apartment_type`=[value-9],`apartment_area`=[value-10],`property`=[value-11] WHERE 1
 	
-	$updatequery = "UPDATE `customer` SET `name`='$nimi',`address`='$kayntiosoite',`billing_address`='$laskutusosoite',`phone_number`='$puhelinnumero',`email`='$email',`apartment_type`='$asuntotyyppi',`apartment_area`='$asuntopintala',`property`='$tonttipintala' WHERE 1";
+	$updatequery = "UPDATE `customer` SET `name`='$nimi',`address`='$kayntiosoite',`billing_address`='$laskutusosoite',`phone_number`='$puhelinnumero',`email`='$email',`apartment_type`='$asuntotyyppi',`apartment_area`='$asuntopintala',`property`='$tonttipintala' WHERE 'key_id' = '$keyid'";
+	
+	
+	
+	if(!mysqli_query($conn, $updatequery)){
+		echo "Kysely epäonnistui " . mysqli_error($conn);
+	}
+	else{
+		echo "onnistu";
+	}
 	
 }
 
@@ -106,14 +123,31 @@ $kayttajatiedothaku = "SELECT `key_id`,`name`,`address`,`billing_address`,`phone
 </head>
 <body>
 	<h1>Tietosi</h1>
-	
+<!--	$_SESSION["kayttajatiedot"]
+kayttajatunnus
+
+nimi
+kayntiosoite
+laskutusosoite
+puhelinnumero
+email
+asuntopintala
+tonttipintala
+rekisteroi
+
+-->
+<?php 
+	$kayttajatiedot = array();
+	$kayttajatiedot = $_SESSION["kayttajatiedot"];
+	print_r($_SESSION);
+	?>
 	<form action="muutos.php" method="get">
 		
-		Nimesi : <input type="text" name="" value=""><br>
-		Osoite : <input type="text" name="" value=""><br>
-		Laskutusosoite : <input type="text" name="" value=""><br>
-		Puhelinnumero : <input type="text" name="" value=""><br>
-		Sähköposti : <input type="text" name="" value=""><br>
+		Nimesi : <input type="text" name="nimi" value="<?php Tulostaja("name") ?>"><br>
+		Osoite : <input type="text" name="kayntiosoite" value="<?php Tulostaja("address") ?>"><br>
+		Laskutusosoite : <input type="text" name="laskutusosoite" value="<?php Tulostaja("billing_address") ?>"><br>
+		Puhelinnumero : <input type="text" name="puhelinnumero" value="<?php Tulostaja("phone_number") ?>"><br>
+		Sähköposti : <input type="text" name="email" value="<?php Tulostaja("email") ?>"><br>
 		
 		Asuntotyyppi : <select name="asuntotyyppi" id="">
         	<option value=""></option>
@@ -129,8 +163,8 @@ $kayttajatiedothaku = "SELECT `key_id`,`name`,`address`,`billing_address`,`phone
         </select>
         <br>
 		
-		Asunnon pinta-ala : <input type="text" name="" value=""><br>
-		Tonttisi koko : <input type="text" name="" value=""><br>
+		Asunnon pinta-ala : <input type="text" name="asuntopintala" value="<?php Tulostaja("apartment_area") ?>"><br>
+		Tonttisi koko : <input type="text" name="tonttipintala" value="<?php Tulostaja("property") ?>"><br>
 		<input type="submit" value="Muuta tietojasi" name="muutos">
 	</form>
 	

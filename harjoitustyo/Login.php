@@ -47,7 +47,6 @@ var_dump($_SESSION);
     Puhelinnumero:    <input type="text" name="puhelinnumero" value="<?php Tulostaja("puhelinnumero"); ?>"> <br>
     Sähköposti:    <input type="text" name="email" value="<?php Tulostaja("email"); ?>"> <br>
     
-<!--    Asuntotyyppi: <input type="text" name="asuntotyyppi"  value="<?php // Tulostaja("asuntotyyppi"); ?>">-->
       
         Asuntotyyppi : <select name="asuntotyyppi" id="">
         	<option value=""></option>
