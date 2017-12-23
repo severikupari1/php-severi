@@ -68,15 +68,28 @@ $kayttajatiedothaku = "SELECT `key_id`,`name`,`address`,`billing_address`,`phone
 <body>
 	<h1>Tietosi</h1>
 	
-	<form action="muutos.<p>You can use the mark tag to <mark>highlight</mark> text.</p>
-hp" method="get">
+	<form action="muutos.php" method="get">
 		
 		Nimesi : <input type="text" name="" value=""><br>
 		Osoite : <input type="text" name="" value=""><br>
 		Laskutusosoite : <input type="text" name="" value=""><br>
 		Puhelinnumero : <input type="text" name="" value=""><br>
 		Sähköposti : <input type="text" name="" value=""><br>
-		Asuntotyyppisi : <input type="text" name="" value=""><br>
+		
+		Asuntotyyppi : <select name="asuntotyyppi" id="">
+        	<option value=""></option>
+        	<option value="omakotitalo" <?php if(isset($_SESSION["kayttajatiedot"]["apartment_type"])){
+	if($_SESSION["kayttajatiedot"]["apartment_type"] == "omakotitalo"){echo "selected";}
+} ?> >omakotitalo</option>
+        	<option value="vapaa-ajan-asunto" <?php if(isset($_SESSION["kayttajatiedot"]["apartment_type"])){
+	if($_SESSION["kayttajatiedot"]["apartment_type"] == "vapaa-ajan-asunto"){echo "selected";}
+} ?> >vapaa-ajan-asunto</option>
+        	<option value="maatila" <?php if(isset($_SESSION["kayttajatiedot"]["apartment_type"])){
+	if($_SESSION["kayttajatiedot"]["apartment_type"] == "maatila"){echo "selected";}
+} ?> >maatila</option>
+        </select>
+        <br>
+		
 		Asunnon pinta-ala : <input type="text" name="" value=""><br>
 		Tonttisi koko<input type="text" name="" value=""><br>
 		
