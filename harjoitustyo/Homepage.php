@@ -118,8 +118,8 @@ if($tilaus != ""){
 		<a href="muutos.php">Hei <?php echo $_SESSION["kayttajatiedot"]["name"]; ?>   tästä pääset  muuttamaan tietojasi</a>
 		
 		
-<!--		INSERT INTO `orders`(`id`, `customer_id`, `description`, `order_date`, `start_date`, `status`, `acception_date`, `rejection_date`, `comment`, `workhours`, `supplement`, `cost`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6],[value-7],[value-8],[value-9],[value-10],[value-11],[value-12])-->
-		<h1>Työtilaus</h1>
+<!--		INSERT INTO `orders`(`id`, `customer_id`, `description`, `order_date`, `start_date`, `status`, `acception_date`, `rejection_date`, `comment`, `workhours`, `supplement`, `cost`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6],[value-7],[value-8],[value-9],[value-10],[value-11],[value-12])--> 
+		<h1>Tilaa työ</h1>
 		<form action="Homepage.php" method="get">
 			Työnkuvaus : <input type="text" name="tyonkuvaus"  ><br>
 			Aloitusaika : <input type="text" name="aloitusaika"  ><br>
@@ -131,6 +131,46 @@ if($tilaus != ""){
 			<input type="submit" value="Tee työtilaus" name="tilaus">
 		</form>
 		
+		<h2>Tilauksesi</h2>
+		
+		<?php $sql = "SELECT `id`, `customer_id`, `description`, `order_date`, `start_date`, `status`, `acception_date`, `rejection_date`, `comment`, `workhours`, `supplement`, `cost` FROM `orders` WHERE `customer_id` = " . $_SESSION["kayttajatiedot"]["key_id"] . " "; 
+		
+	//echo $sql;
+	$tulos = mysqli_query($conn, $sql);
+	   
+	if ( !$tulos )
+	{
+		echo "Kysely epäonnistui " . mysqli_error($conn);
+	}
+	else
+	{
+        
+		
+		while ($rivi = mysqli_fetch_array($tulos, MYSQL_ASSOC)) { echo <<<EOT
+
+EOT;
+  			}
+		} 
+    
+		
+	
+	?>
+		
+		
+		
+		<table>
+			<tr>
+				<th>Työnkuvaus</th>
+				<th>Tilausaika</th>
+				<th>Aloitusaika</th>
+				<th>Status</th>
+				<th>Kommentti</th>
+				<th>Tunnit</th>
+				<th>Tarvikkeet</th>
+				<th>Hinta</th>
+				
+			</tr>
+		</table>
 		
 </body>
 </html>
