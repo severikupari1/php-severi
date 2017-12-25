@@ -132,7 +132,17 @@ if($tilaus != ""){
 		</form>
 		
 		<h2>Tilauksesi</h2>
-		
+		<table>
+			<tr>
+				<th>Työnkuvaus</th>
+				<th>Tilausaika</th>
+				<th>Aloitusaika</th>
+				<th>Status</th>
+				<th>Kommentti</th>
+				<th>Tunnit</th>
+				<th>Tarvikkeet</th>
+				<th>Hinta</th>		
+			</tr>
 		<?php $sql = "SELECT `id`, `customer_id`, `description`, `order_date`, `start_date`, `status`, `acception_date`, `rejection_date`, `comment`, `workhours`, `supplement`, `cost` FROM `orders` WHERE `customer_id` = " . $_SESSION["kayttajatiedot"]["key_id"] . " "; 
 		
 	//echo $sql;
@@ -147,7 +157,16 @@ if($tilaus != ""){
         
 		
 		while ($rivi = mysqli_fetch_array($tulos, MYSQL_ASSOC)) { echo <<<EOT
-
+<tr>
+				<td>$rivi[description]</td>
+				<td>$rivi[order_date]</td>
+				<td>$rivi[start_date]</td>
+				<td>$rivi[status]</td>
+				<td>$rivi[comment]</td>
+				<td>$rivi[workhours]</td>
+				<td>$rivi[supplement]</td>
+				<td>$rivi[cost]</td>
+			</tr>
 EOT;
   			}
 		} 
@@ -155,21 +174,7 @@ EOT;
 		
 	
 	?>
-		
-		
-		
-		<table>
-			<tr>
-				<th>Työnkuvaus</th>
-				<th>Tilausaika</th>
-				<th>Aloitusaika</th>
-				<th>Status</th>
-				<th>Kommentti</th>
-				<th>Tunnit</th>
-				<th>Tarvikkeet</th>
-				<th>Hinta</th>
-				
-			</tr>
+			
 		</table>
 		
 </body>
