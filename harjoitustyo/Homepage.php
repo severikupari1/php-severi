@@ -204,7 +204,9 @@ EOT;
         
 		
 		while ($rivi = mysqli_fetch_array($tulos, MYSQL_ASSOC)) {
-			echo "<form action=\"Homepage.php?muokataan\" method=\"get\">
+			echo "
+			<h1></h1>
+			<form action=\"Homepage.php?muokataan\" method=\"get\">
 			Työnkuvaus : <input type=\"text\" name=\"tyonkuvaus\" value=\"$rivi[description]\"><br>
 			
 			Aloitussaika : <input type=\"text\" name=\"aloitusaika\" value=\"$rivi[order_date]\"><br>
