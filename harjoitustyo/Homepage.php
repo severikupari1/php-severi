@@ -80,7 +80,9 @@ $tunnit = Tarkaste($conn, "tunnit");
 $tarvikkeet = Tarkaste($conn, "tarvikkeet");
 $hinta = Tarkaste($conn, "hinta");
 $tilaus = Tarkaste($conn, "tilaus");
-$tilausaika = "";
+$unixaika = time();
+$tilausaika = date("Y-m-d",$unixaika);
+echo $tilausaika;
 $status = "TILATTU";
 if($tilaus != ""){
 			$tilausarray = array();
@@ -92,6 +94,15 @@ if($tilaus != ""){
 				$tilausquery = "INSERT INTO `orders`(`customer_id`, `description`, `order_date`, `start_date`, `status`, `comment`, `workhours`, `supplement`, `cost`) VALUES ('" . $tilausarray["kayttajaid"] . "','$tyonkuvaus','$tilausaika','$aloitusaika','$status','$kommentti','$tunnit','$tarvikkeet','$hinta')";
 	
 	echo $tilausquery;
+	
+	if(mysqli_query($conn,$tilausquery))
+	{
+		echo "onnistu";
+	}
+	else
+	{
+		echo "feilas";
+	}
 }
 
 
