@@ -166,12 +166,17 @@ if($tilaus != ""){
 				<td>$rivi[workhours]</td>
 				<td>$rivi[supplement]</td>
 				<td>$rivi[cost]</td>
-			</tr>
+			
 EOT;
+	if($rivi["status"] == "TILATTU"){
+		echo "<td>Poista</td>";
+	}
+		echo "</tr>";
   			}
 		} 
     
 		
+	
 	
 	?>
 			
