@@ -18,6 +18,9 @@ function Tarkaste($conn,$muuttuja){
     return $palautus;
 }
 
+$muokattavaid = Tarkaste($conn, "muokattavaid");
+$poista = Tarkaste($conn, "poista");
+$muokkaa = Tarkaste($conn, "muokkaa");
 ?>
 
 
@@ -169,7 +172,9 @@ if($tilaus != ""){
 			
 EOT;
 	if($rivi["status"] == "TILATTU"){
-		echo "<td><a href=\"muokkaus.php?muokattavaid=$rivi[id]\">Muokkaa</a> </td>";
+		echo "<td><a href=\"Homepage.php?muokattavaid=$rivi[id]\">Muokkaa</a> </td>";
+		
+		echo "<td><a href=\"Homepage.php?poista=$rivi[id]\">Poista</a> </td>";
 	}
 		echo "</tr>";
   			}
@@ -181,6 +186,61 @@ EOT;
 	?>
 			
 		</table>
+		
+	<?php
+	
+	if($muokattavaid != ""){
+		$sql  = 
+		"SELECT `id`, `customer_id`, `description`, `order_date`, `start_date`, `status`, `acception_date`, `rejection_date`, `comment`, `workhours`, `supplement`, `cost` FROM `orders` WHERE `customer_id` = " . $_SESSION["kayttajatiedot"]["key_id"] . " AND id = $muokattavaid"; 
+		echo $sql;
+		
+		$tulos = mysqli_query($conn, $sql);
+	if ( !$tulos )
+	{
+		echo "Kysely epäonnistui " . mysqli_error($conn);
+	}
+	else
+	{
+        
+		
+		while ($rivi = mysqli_fetch_array($tulos, MYSQL_ASSOC)) {
+			echo "<form action=\"Homepage.php?muokataan\" method=\"get\">
+			Työnkuvaus : <input type=\"text\" name=\"tyonkuvaus\" value=\"$rivi[description]\"><br>
+			
+			Aloitussaika : <input type=\"text\" name=\"aloitusaika\" value=\"$rivi[order_date]\"><br>
+			
+			Kommentti : <input type=\"text\" name=\"kommentti\" value=\"$rivi[comment]\"><br>
+			
+			Tunnit : <input type=\"text\" name=\"tunnit\" value=\"$rivi[workhours]\"><br>
+			
+			Tarvikkeet : <input type=\"text\" name=\"tarvikkeet\" value=\"$rivi[supplement]\"><br>
+			
+			Hinta : <input type=\"text\" name=\"hinta\" value=\"$rivi[cost]\"><br>
+			
+			<input type=\"submit\" value=\"Muokkaa\" name =\"muokkaa\">
+	
+	      <input type=\"submit\" value=\"Peruuta\" name =\"\">
+		</form>	";
+		}
+	} 
+		
+	}//ison Iffin
+	
+	/*
+				$rivi[description]</td>
+				$rivi[order_date]</td>
+				$rivi[start_date]</td>
+				$rivi[status]</td>
+				$rivi[comment]</td>
+				$rivi[workhours]</td>
+				$rivi[supplement]</td>
+				$rivi[cost]
+	*/
+	
+	?>	
+	
+		
+		
 		
 </body>
 </html>
