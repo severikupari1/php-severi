@@ -169,13 +169,13 @@ if($tilaus != ""){
 			
 EOT;
 	if($rivi["status"] == "TILATTU"){
-		echo "<td>Poista</td>";
+		echo "<td><a href=\"muokkaus.php?muokattavaid=$rivi[id]\">Muokkaa</a> </td>";
 	}
 		echo "</tr>";
   			}
 		} 
     
-		
+	
 	
 	
 	?>
