@@ -125,7 +125,7 @@ if($tilaus != ""){
 		<h1>Tilaa työ</h1>
 		<form action="Homepage.php" method="get">
 			Työnkuvaus : <input type="text" name="tyonkuvaus"  ><br>
-			Aloitusaika : <input type="text" name="aloitusaika"  ><br>
+			
 			Kommentit : <input type="text" name="kommentti"  ><br>
 			Tunnit : <input type="text" name="tunnit"  ><br>
 			Tarvikkeet <input type="text" name="tarvikkeet"  > <br>
@@ -163,7 +163,7 @@ if($tilaus != ""){
 <tr>
 				<td>$rivi[description]</td>
 				<td>$rivi[order_date]</td>
-				<td>$rivi[start_date]</td>
+				
 				<td>$rivi[status]</td>
 				<td>$rivi[comment]</td>
 				<td>$rivi[workhours]</td>
