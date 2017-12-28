@@ -12,7 +12,7 @@ unset($_SESSION['kirjautuminen']);
 }
 
  
-var_dump($_SESSION);
+
 function Tarkaste($conn,$muuttuja){
        
    if(isset($_GET[$muuttuja]))
