@@ -18,9 +18,31 @@ function Tarkaste($conn,$muuttuja){
     return $palautus;
 }
 
-$muokattavaid = Tarkaste($conn, "muokattavaid");
 $poista = Tarkaste($conn, "poista");
+
+if($poista != ""){
+
+		 $sql = "DELETE FROM `orders` WHERE `orders`.`id` = $poista";
+		echo $sql;
+		if(mysqli_query($conn, $sql))
+		{
+			header('Location: Homepage.php?poisto_ok=1');
+			
+		}
+		else{
+			header('Location: Homepage.php?poisto_feilas');
+		}
+	}
+
+
+$muokattavaid = Tarkaste($conn, "muokattavaid");
+$poisto_ok = Tarkaste($conn, "poisto_ok");
+
+
+
+
 $muokkaa = Tarkaste($conn, "muokkaa");
+//echo $_SESSION["muokattavaid"];
 ?>
 
 
@@ -94,7 +116,7 @@ if($tilaus != ""){
 			//INSERT INTO `orders`(`customer_id`, `description`, `order_date`, `start_date`, `status`, `acception_date`, `rejection_date`, `comment`, `workhours`, `supplement`, `cost`) VALUES ([value-2],[value-3],[value-4],[value-5],[value-6],[value-7],[value-8],[value-9],[value-10],[value-11],[value-12])
 				
 				
-				$tilausquery = "INSERT INTO `orders`(`customer_id`, `description`, `order_date`, `start_date`, `status`, `comment`, `workhours`, `supplement`, `cost`) VALUES ('" . $tilausarray["kayttajaid"] . "','$tyonkuvaus','$tilausaika','$aloitusaika','$status','$kommentti','$tunnit','$tarvikkeet','$hinta')";
+				$tilausquery = "INSERT INTO `orders`(`customer_id`, `description`,`status`,`order_date`) VALUES ('" . $tilausarray["kayttajaid"] . "','$tyonkuvaus','$status','$tilausaika')";
 	
 	echo $tilausquery;
 	
@@ -126,10 +148,12 @@ if($tilaus != ""){
 		<form action="Homepage.php" method="get">
 			Työnkuvaus : <input type="text" name="tyonkuvaus"  ><br>
 			
+<!--
 			Kommentit : <input type="text" name="kommentti"  ><br>
 			Tunnit : <input type="text" name="tunnit"  ><br>
 			Tarvikkeet <input type="text" name="tarvikkeet"  > <br>
 			Hinta : <input type="text" name="hinta"  ><br>
+-->
 			
 			<input type="submit" value="Tee työtilaus" name="tilaus">
 		</form>
@@ -163,7 +187,7 @@ if($tilaus != ""){
 <tr>
 				<td>$rivi[description]</td>
 				<td>$rivi[order_date]</td>
-				
+				<td></td>
 				<td>$rivi[status]</td>
 				<td>$rivi[comment]</td>
 				<td>$rivi[workhours]</td>
@@ -189,44 +213,44 @@ EOT;
 		
 	<?php
 	
-	if($muokattavaid != ""){
-		$sql  = 
-		"SELECT `id`, `customer_id`, `description`, `order_date`, `start_date`, `status`, `acception_date`, `rejection_date`, `comment`, `workhours`, `supplement`, `cost` FROM `orders` WHERE `customer_id` = " . $_SESSION["kayttajatiedot"]["key_id"] . " AND id = $muokattavaid"; 
-		echo $sql;
-		
-		$tulos = mysqli_query($conn, $sql);
-	if ( !$tulos )
-	{
-		echo "Kysely epäonnistui " . mysqli_error($conn);
-	}
-	else
-	{
-        
-		
-		while ($rivi = mysqli_fetch_array($tulos, MYSQL_ASSOC)) {
-			echo "
-			<h1></h1>
-			<form action=\"Homepage.php?muokataan\" method=\"get\">
-			Työnkuvaus : <input type=\"text\" name=\"tyonkuvaus\" value=\"$rivi[description]\"><br>
-			
-			Aloitussaika : <input type=\"text\" name=\"aloitusaika\" value=\"$rivi[order_date]\"><br>
-			
-			Kommentti : <input type=\"text\" name=\"kommentti\" value=\"$rivi[comment]\"><br>
-			
-			Tunnit : <input type=\"text\" name=\"tunnit\" value=\"$rivi[workhours]\"><br>
-			
-			Tarvikkeet : <input type=\"text\" name=\"tarvikkeet\" value=\"$rivi[supplement]\"><br>
-			
-			Hinta : <input type=\"text\" name=\"hinta\" value=\"$rivi[cost]\"><br>
-			
-			<input type=\"submit\" value=\"Muokkaa\" name =\"muokkaa\">
-	
-	      <input type=\"submit\" value=\"Peruuta\" name =\"\">
-		</form>	";
-		}
-	} 
-		
-	}//ison Iffin
+//	if($muokattavaid != ""){
+//		$sql  = 
+//		"SELECT `id`, `customer_id`, `description`, `order_date`, `start_date`, `status`, `acception_date`, `rejection_date`, `comment`, `workhours`, `supplement`, `cost` FROM `orders` WHERE `customer_id` = " . $_SESSION["kayttajatiedot"]["key_id"] . " AND id = $muokattavaid"; 
+//		echo $sql;
+//		
+//		$tulos = mysqli_query($conn, $sql);
+//	if ( !$tulos )
+//	{
+//		echo "Kysely epäonnistui " . mysqli_error($conn);
+//	}
+//	else
+//	{
+//        
+//		
+//		while ($rivi = mysqli_fetch_array($tulos, MYSQL_ASSOC)) {
+//			echo "
+//			<h1></h1>
+//			<form action=\"Homepage.php?muokataan\" method=\"get\">
+//			Työnkuvaus : <input type=\"text\" name=\"tyonkuvaus\" value=\"$rivi[description]\"><br>
+//			
+//			Aloitussaika : <input type=\"text\" name=\"aloitusaika\" value=\"$rivi[order_date]\"><br>
+//			
+//			Kommentti : <input type=\"text\" name=\"kommentti\" value=\"$rivi[comment]\"><br>
+//			
+//			Tunnit : <input type=\"text\" name=\"tunnit\" value=\"$rivi[workhours]\"><br>
+//			
+//			Tarvikkeet : <input type=\"text\" name=\"tarvikkeet\" value=\"$rivi[supplement]\"><br>
+//			
+//			Hinta : <input type=\"text\" name=\"hinta\" value=\"$rivi[cost]\"><br>
+//			
+//			<input type=\"submit\" value=\"Muokkaa\" name =\"muokkaa\">
+//	
+//	      <input type=\"submit\" value=\"Peruuta\" name =\"\">
+//		</form>	";
+//		}
+//	} 
+//		
+//	}//ison Iffin
 	
 	/*
 				$rivi[description]</td>
@@ -238,6 +262,61 @@ EOT;
 				$rivi[supplement]</td>
 				$rivi[cost]
 	*/
+	
+	
+		if($muokattavaid != ""){
+		$sql  = 
+		"SELECT `id`, `customer_id`, `description`, `order_date`, `start_date`, `status`, `acception_date`, `rejection_date`, `comment`, `workhours`, `supplement`, `cost` FROM `orders` WHERE `customer_id` = " . $_SESSION["kayttajatiedot"]["key_id"] . " AND id = $muokattavaid"; 
+		//echo $sql;
+		$_SESSION["muokattavaid"] = $muokattavaid;
+			
+			
+		$tulos = mysqli_query($conn, $sql);
+	if ( !$tulos )
+	{
+		echo "Kysely epäonnistui " . mysqli_error($conn);
+	}
+	else
+	{
+        
+		
+		while ($rivi = mysqli_fetch_array($tulos, MYSQL_ASSOC)) {
+			echo "
+			<h1>Muokkaa </h1>
+			<form action=\"Homepage.php?muokataan\" method=\"get\">
+			Työnkuvaus : <input type=\"text\" name=\"tyonkuvaus\" value=\"$rivi[description]\"><br>
+	
+			<input type=\"submit\" value=\"Muokkaa\" name =\"muokkaa\">
+	
+	      <input type=\"submit\" value=\"Peruuta\" name =\"\">
+		</form>	";
+		}
+	} 
+		
+	}//ison Iffin
+	
+	if($muokkaa != ""){
+		$muokkausid = $_SESSION["muokattavaid"];
+		
+		
+		 $sql = "UPDATE `orders` SET `description` = '$tyonkuvaus' WHERE `orders`.`id` = $muokkausid ";
+		echo $sql;
+		if(mysqli_query($conn, $sql))
+		{
+			echo "päivitys onnistui!";
+		}
+		else{
+			echo "päivittäminen ei onnistunut";
+		}
+	}
+	
+	if($poisto_ok != ""){
+		
+	}
+		
+	
+	
+	
 	
 	?>	
 	
