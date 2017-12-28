@@ -15,6 +15,11 @@ if(isset($_GET["lisaysonnistui"])){
 if(isset($_GET["lisaysepaonnistui"])){
     echo "<p>lisays epäonnistui</p>";
 }
+if(isset($_GET["kirjauduit_ulos"])){
+    echo "<p>Kirjauduit ulos </p>";
+}
+
+
 
 var_dump($_SESSION);
 

@@ -1,9 +1,18 @@
 <?php session_start();
 if(!isset($_SESSION["kirjautuminen"])){
-	//header('Location: Login.php?takaisin');
+	header('Location: Login.php?takaisin');
 } 
-require_once("db.inc"); 
+require_once("db.inc");
+$kirjaudu_ulos = Tarkaste($conn, "kirjaudu_ulos");
 
+if($kirjaudu_ulos != ""){
+		
+unset($_SESSION['kirjautuminen']);
+	header('Location: Login.php?kirjauduit_ulos');
+}
+
+ 
+var_dump($_SESSION);
 function Tarkaste($conn,$muuttuja){
        
    if(isset($_GET[$muuttuja]))
@@ -37,8 +46,6 @@ if($poista != ""){
 
 $muokattavaid = Tarkaste($conn, "muokattavaid");
 $poisto_ok = Tarkaste($conn, "poisto_ok");
-
-
 
 
 $muokkaa = Tarkaste($conn, "muokkaa");
@@ -169,10 +176,13 @@ if($tilaus != "" && $tyonkuvaus != ""){
 	<title>Päänäyttö </title>
 </head>
 <body>
-		<a href="muutos.php">Hei <?php echo $_SESSION["kayttajatiedot"]["name"]; ?>   tästä pääset  muuttamaan tietojasi</a>
+		<a href="muutos.php">Hei <?php echo $_SESSION["kayttajatiedot"]["name"]; ?>   tästä pääset  muuttamaan tietojasi</a><br><br>
 		
 		
-<!--		INSERT INTO `orders`(`id`, `customer_id`, `description`, `order_date`, `start_date`, `status`, `acception_date`, `rejection_date`, `comment`, `workhours`, `supplement`, `cost`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6],[value-7],[value-8],[value-9],[value-10],[value-11],[value-12])--> 
+		<a href="Homepage.php?kirjaudu_ulos=1">Kirjaudu ulos</a>
+
+		
+<!--		INSERT INTO `orders`(`id`, `customer_id`, `description`, `order_date`, `start_date`, `status`, `acception_date`, `rejection_date`, `comment`, `workhours`, `supplement`, `cost`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6],[value-7],[value-8],[value-9],[value-10],[value-11],[value-12])     --> 
 		<h1>Tilaa työ</h1>
 		<form action="Homepage.php" method="get">
 			Työnkuvaus : <input type="text" name="tyonkuvaus"  ><br>
