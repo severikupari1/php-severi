@@ -112,7 +112,31 @@ $status = "TILATTU";
 $hyvaksytty  = Tarkaste($conn, "hyvaksytty");
 $hylatty = Tarkaste($conn, "hylatty");
 
+if($hyvaksytty != ""){
+	$unixaika = time();
+    $hyvaksyttyaika = date("Y-m-d",$unixaika);
+		
+	$sql = "	UPDATE `orders` SET `status` = 'HYVAKSYTTY', `acception_date` = '$hyvaksyttyaika' WHERE `orders`.`id` = $hyvaksytty";
+	
+	
+	if(mysqli_query($conn,$sql)){
+		echo "onnistu";
+	}
+	else{
+		echo "feilas";
+	}
+	
+}
 
+if($hylatty != ""){
+	$unixaika = time();
+    $hylattyaika = date("Y-m-d",$unixaika);
+		
+	$sql = "	UPDATE `orders` SET `status` = 'HYLATTY', `rejection_date` = '$hylattyaika' WHERE `orders`.`id` = $hylatty";
+	
+	mysqli_query($conn,$sql);
+	
+}
 
 if($tilaus != "" && $tyonkuvaus != ""){
 			$tilausarray = array();
