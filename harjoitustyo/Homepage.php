@@ -238,6 +238,11 @@ EOT;
 			
 			
 		$lisaysquery = "UPDATE `orders` SET `start_date` = '$aloitusaika' WHERE `orders`.`id` = $rivi[id]";	
+			
+			
+			
+			
+			
 		//echo $lisaysquery;
 			if(mysqli_query($conn,$lisaysquery)){
 				echo "aloitusaika onnistu";
@@ -253,7 +258,12 @@ EOT;
 		 $unixaika = time();
          $valmisaika = date("Y-m-d",$unixaika);
 		
-		$valmissquery = "UPDATE `orders` SET `finished_time` = '$valmisaika' WHERE `orders`.`id` = $rivi[id]";	
+		$valmissquery = "UPDATE `orders` SET `finished_time` = '$valmisaika' WHERE `orders`.`id` = ";	
+		
+		
+		$valmissquery = "UPDATE `orders` SET `status` = 'VALMIS', `comment` = 'Hienosti meni', `workhours` = '2', `supplement` = 'tarvikkeita meni 10e', `cost` = '300e',`finished_time` = '$valmisaika' WHERE `orders`.`id` = $rivi[id]"; 
+		
+		
 		echo $valmissquery;
 			if(mysqli_query($conn,$valmissquery)){
 				echo "valmis onnistu";
