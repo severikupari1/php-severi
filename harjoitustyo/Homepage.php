@@ -23,7 +23,7 @@ $poista = Tarkaste($conn, "poista");
 if($poista != ""){
 
 		 $sql = "DELETE FROM `orders` WHERE `orders`.`id` = $poista";
-		echo $sql;
+		//echo $sql;
 		if(mysqli_query($conn, $sql))
 		{
 			header('Location: Homepage.php?poisto_ok=1');
@@ -99,7 +99,7 @@ $kayttajatiedothaku = "SELECT `key_id`,`name`,`address`,`billing_address`,`phone
 //var_dump($_SESSION);
 
 $tyonkuvaus = Tarkaste($conn, "tyonkuvaus");
-$aloitusaika = Tarkaste($conn, "aloitusaika");
+
 $kommentti = Tarkaste($conn, "kommentti");
 $tunnit = Tarkaste($conn, "tunnit");
 $tarvikkeet = Tarkaste($conn, "tarvikkeet");
@@ -109,7 +109,7 @@ $unixaika = time();
 $tilausaika = date("Y-m-d",$unixaika);
 echo $tilausaika;
 $status = "TILATTU";
-if($tilaus != ""){
+if($tilaus != "" && $tyonkuvaus != ""){
 			$tilausarray = array();
 			$tilausarray["kayttajaid"] = $_SESSION["kayttajatiedot"]["key_id"];
 			//echo $tilausarray["kayttajaid"];
@@ -163,14 +163,15 @@ if($tilaus != ""){
 			<tr>
 				<th>Työnkuvaus</th>
 				<th>Tilausaika</th>
-				<th>Aloitusaika</th>
+				<th>Työaloitettu</th>
+				<th>Työvalmis</th>
 				<th>Status</th>
 				<th>Kommentti</th>
 				<th>Tunnit</th>
 				<th>Tarvikkeet</th>
 				<th>Hinta</th>		
 			</tr>
-		<?php $sql = "SELECT `id`, `customer_id`, `description`, `order_date`, `start_date`, `status`, `acception_date`, `rejection_date`, `comment`, `workhours`, `supplement`, `cost` FROM `orders` WHERE `customer_id` = " . $_SESSION["kayttajatiedot"]["key_id"] . " "; 
+		<?php $sql = "SELECT `id`, `customer_id`, `description`, `order_date`, `start_date`, `status`, `acception_date`, `rejection_date`, `comment`, `workhours`, `supplement`, `cost`,`finished_time` FROM `orders` WHERE `customer_id` = " . $_SESSION["kayttajatiedot"]["key_id"] . " "; 
 		
 	//echo $sql;
 	$tulos = mysqli_query($conn, $sql);
@@ -187,7 +188,8 @@ if($tilaus != ""){
 <tr>
 				<td>$rivi[description]</td>
 				<td>$rivi[order_date]</td>
-				<td></td>
+				<td>$rivi[start_date]</td>
+				<td>$rivi[finished_time]</td>
 				<td>$rivi[status]</td>
 				<td>$rivi[comment]</td>
 				<td>$rivi[workhours]</td>
@@ -195,11 +197,49 @@ if($tilaus != ""){
 				<td>$rivi[cost]</td>
 			
 EOT;
+		if($rivi["status"] == "ALOITETTU"){
+			
+		 $unixaika = time();
+         $aloitusaika = date("Y-m-d",$unixaika);
+				
+			
+			
+		$lisaysquery = "UPDATE `orders` SET `start_date` = '$aloitusaika' WHERE `orders`.`id` = $rivi[id]";	
+		//echo $lisaysquery;
+			if(mysqli_query($conn,$lisaysquery)){
+				echo "aloitusaika onnistu";
+			}
+			else{
+				echo "aloitusaika feilas";
+			}
+			
+	}
+		
+	if($rivi["status"] == "VALMIS"){
+			
+		 $unixaika = time();
+         $valmisaika = date("Y-m-d",$unixaika);
+		
+		$valmissquery = "UPDATE `orders` SET `finished_time` = '$valmisaika' WHERE `orders`.`id` = $rivi[id]";	
+		echo $valmissquery;
+			if(mysqli_query($conn,$valmissquery)){
+				echo "valmis onnistu";
+			}
+			else{
+				echo "valmis feilas";
+			}
+			
+	}
+															
 	if($rivi["status"] == "TILATTU"){
 		echo "<td><a href=\"Homepage.php?muokattavaid=$rivi[id]\">Muokkaa</a> </td>";
 		
 		echo "<td><a href=\"Homepage.php?poista=$rivi[id]\">Poista</a> </td>";
 	}
+					
+	
+															
+															
 		echo "</tr>";
   			}
 		} 
@@ -311,7 +351,7 @@ EOT;
 	}
 	
 	if($poisto_ok != ""){
-		
+		echo "<p>poisto onnistui</p>";
 	}
 		
 	
