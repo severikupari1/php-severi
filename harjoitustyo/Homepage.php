@@ -109,6 +109,11 @@ $unixaika = time();
 $tilausaika = date("Y-m-d",$unixaika);
 echo $tilausaika;
 $status = "TILATTU";
+$hyvaksytty  = Tarkaste($conn, "hyvaksytty");
+$hylatty = Tarkaste($conn, "hylatty");
+
+
+
 if($tilaus != "" && $tyonkuvaus != ""){
 			$tilausarray = array();
 			$tilausarray["kayttajaid"] = $_SESSION["kayttajatiedot"]["key_id"];
@@ -164,12 +169,14 @@ if($tilaus != "" && $tyonkuvaus != ""){
 				<th>Työnkuvaus</th>
 				<th>Tilausaika</th>
 				<th>Työaloitettu</th>
-				<th>Työvalmis</th>
+				<th>Työvalmis</th>			
 				<th>Status</th>
 				<th>Kommentti</th>
 				<th>Tunnit</th>
 				<th>Tarvikkeet</th>
-				<th>Hinta</th>		
+				<th>Hinta</th>	
+				<th>Hyväksytty</th>
+				<th>Hylätty</th>	
 			</tr>
 		<?php $sql = "SELECT `id`, `customer_id`, `description`, `order_date`, `start_date`, `status`, `acception_date`, `rejection_date`, `comment`, `workhours`, `supplement`, `cost`,`finished_time` FROM `orders` WHERE `customer_id` = " . $_SESSION["kayttajatiedot"]["key_id"] . " "; 
 		
@@ -195,6 +202,8 @@ if($tilaus != "" && $tyonkuvaus != ""){
 				<td>$rivi[workhours]</td>
 				<td>$rivi[supplement]</td>
 				<td>$rivi[cost]</td>
+				<td>$rivi[acception_date]</td>
+				<td>$rivi[rejection_date]</td>
 			
 EOT;
 		if($rivi["status"] == "ALOITETTU"){
@@ -228,7 +237,9 @@ EOT;
 			else{
 				echo "valmis feilas";
 			}
-			
+		echo "<td><a href=\"Homepage.php?hyvaksytty=$rivi[id]\">hyväksy</a></td>";
+		echo "<td><a href=\"Homepage.php?hylatty=$rivi[id]\">hylkää</a></td>";
+				
 	}
 															
 	if($rivi["status"] == "TILATTU"){
