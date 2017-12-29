@@ -440,10 +440,43 @@ $tarjous_hylatty = Tarkaste($conn, "tarjous_hylatty");
 		echo "feilas";
 	}
 	
-	$sql = "";	
+	$sql = "SELECT `id`, `customer_id`, `description`, `order_date`, `start_date`, `status`, `acception_date`, `rejection_date`, `comment`, `workhours`, `supplement`, `cost`,`finished_time` FROM `requestorder` WHERE `customer_id` = " . $_SESSION["kayttajatiedot"]["key_id"] . " AND `requestorder`.`id` = $tarjous_hyvaksytty"; 
 		
-}
-
+	echo $sql;
+	$tulos = mysqli_query($conn, $sql);
+	   
+	if ( !$tulos )
+	{
+		echo "Kysely epäonnistui " . mysqli_error($conn);
+	}
+	else
+	{
+        
+		
+		while ($rivi = mysqli_fetch_array($tulos, MYSQL_ASSOC)) { 
+			
+			$tarjous_description =$rivi[description];
+			$tarjous_order_date =	$rivi[order_date];			
+			$tarjous_finished_time =	$rivi[finished_time];
+			$tarjous_status =	$rivi[status];
+			$tarjous_comment =	$rivi[comment]	;			
+			$tarjous_cost =	$rivi[cost];
+			$tarjous_acception_date =	$rivi[acception_date];
+			$tarjous_rejection_date =	$rivi[rejection_date];					
+	}
+	$tilausarray = array();
+			$tilausarray["kayttajaid"] = $_SESSION["kayttajatiedot"]["key_id"];
+		
+		
+		
+		$sql = "INSERT INTO `orders`( `customer_id`, `description`, `order_date`,  `status`,   `comment`,   `cost` ) VALUES (`$tilausarray[kayttajaid]`,`$tarjous_description`,`$tarjous_order_date`,`TILATTU`,`$tarjous_comment`,`$tarjous_cost`)";
+		
+		echo $sql;
+   }
+		
+	}
+	
+	
 if($tarjous_hylatty != ""){
 	$unixaika = time();
     $hylattyaika = date("Y-m-d",$unixaika);
@@ -516,8 +549,7 @@ if($tarjous_hylatty != ""){
 		while ($rivi = mysqli_fetch_array($tulos, MYSQL_ASSOC)) { echo <<<EOT
 <tr>
 				<td>$rivi[description]</td>
-				<td>$rivi[order_date]</td>
-				
+				<td>$rivi[order_date]</td>			
 				<td>$rivi[finished_time]</td>
 				<td>$rivi[status]</td>
 				<td>$rivi[comment]</td>				
