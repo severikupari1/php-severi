@@ -46,7 +46,8 @@ if($poista != ""){
 
 $muokattavaid = Tarkaste($conn, "muokattavaid");
 $poisto_ok = Tarkaste($conn, "poisto_ok");
-
+$tarjouspyynto_kuvaus = Tarkaste($conn, "tarjouspyynto_kuvaus");
+$tarjouspyynto = Tarkaste($conn, "tarjouspyynto");
 
 $muokkaa = Tarkaste($conn, "muokkaa");
 //echo $_SESSION["muokattavaid"];
@@ -182,20 +183,23 @@ if($tilaus != "" && $tyonkuvaus != ""){
 		<a href="Homepage.php?kirjaudu_ulos=1">Kirjaudu ulos</a>
 
 		
-<!--		INSERT INTO `orders`(`id`, `customer_id`, `description`, `order_date`, `start_date`, `status`, `acception_date`, `rejection_date`, `comment`, `workhours`, `supplement`, `cost`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6],[value-7],[value-8],[value-9],[value-10],[value-11],[value-12])     --> 
+
 		<h1>Tilaa työ</h1>
 		<form action="Homepage.php" method="get">
 			Työnkuvaus : <input type="text" name="tyonkuvaus"  ><br>
-			
-<!--
-			Kommentit : <input type="text" name="kommentti"  ><br>
-			Tunnit : <input type="text" name="tunnit"  ><br>
-			Tarvikkeet <input type="text" name="tarvikkeet"  > <br>
-			Hinta : <input type="text" name="hinta"  ><br>
--->
-			
+		
 			<input type="submit" value="Tee työtilaus" name="tilaus">
 		</form>
+		
+		<h1>Tee tarjouspyyntö</h1>
+		<form action="Homepage.php" method="get">
+			Tarjouspyyntö : <input type="text" name="tarjouspyynto_kuvaus"  ><br>
+			
+
+			
+			<input type="submit" value="Tee tarjouspyyntö" name="tarjouspyynto">
+		</form>
+		
 		
 		<h2>Tilauksesi</h2>
 		<table>
@@ -248,11 +252,7 @@ EOT;
 			
 			
 		$lisaysquery = "UPDATE `orders` SET `start_date` = '$aloitusaika' WHERE `orders`.`id` = $rivi[id]";	
-			
-			
-			
-			
-			
+					
 		//echo $lisaysquery;
 			if(mysqli_query($conn,$lisaysquery)){
 				echo "aloitusaika onnistu";
