@@ -58,8 +58,7 @@ if($tarjouspoista != ""){
 
 $muokattavaid = Tarkaste($conn, "muokattavaid");
 $poisto_ok = Tarkaste($conn, "poisto_ok");
-$tarjouspyynto_kuvaus = Tarkaste($conn, "tarjouspyynto_kuvaus");
-$tarjouspyynto = Tarkaste($conn, "tarjouspyynto");
+
 
 $muokkaa = Tarkaste($conn, "muokkaa");
 
@@ -190,12 +189,7 @@ if($tilaus != "" && $tyonkuvaus != ""){
 			<input type="submit" value="Tee työtilaus" name="tilaus">
 		</form>
 		
-		<h1>Tee tarjouspyyntö</h1>
-		<form action="Homepage.php" method="get">
-			Tarjouspyyntö : <input type="text" name="tarjouspyynto_kuvaus"  ><br>
-	
-			<input type="submit" value="Tee tarjouspyyntö" name="tarjouspyynto">
-		</form>
+		
 		
 		
 		<h2>Tilauksesi</h2>
@@ -417,12 +411,48 @@ EOT;
 	
 	
 	<?php
+	
+	
+	
+	
 $tarjousmuokataan = Tarkaste($conn, "tarjousmuokataan");
 $tarjous_tyonkuvaus = Tarkaste($conn, "tarjous_tyonkuvaus");
 $tarjous_muokkaa = Tarkaste($conn, "tarjous_muokkaa");
 $tarjousmuokattavaid = Tarkaste($conn, "tarjousmuokattavaid");
+$tarjouspyynto = Tarkaste($conn, "tarjouspyynto");
+$tarjouspyynto_kuvaus = Tarkaste($conn, "tarjouspyynto_kuvaus");
 
+	
+	if($tarjouspyynto != "" && $tarjouspyynto_kuvaus != ""){
+			$tilausarray = array();
+			$tilausarray["kayttajaid"] = $_SESSION["kayttajatiedot"]["key_id"];
+		
+				$tilausquery = "INSERT INTO `requestorder`(`customer_id`, `description`,`status`,`order_date`) VALUES ('" . $tilausarray["kayttajaid"] . "','$tarjouspyynto_kuvaus','JATETTY','$tilausaika')";
+	
+	echo $tilausquery;
+	
+	if(mysqli_query($conn,$tilausquery))
+	{
+		echo "onnistu";
+	}
+	else
+	{
+		echo "feilas";
+	}
+}
+	
+	
+	
+	
 	?>
+	<h1>Tee tarjouspyyntö</h1>
+		<form action="Homepage.php" method="get">
+			Tarjouspyyntö : <input type="text" name="tarjouspyynto_kuvaus"  ><br>
+	
+			<input type="submit" value="Tee tarjouspyyntö" name="tarjouspyynto">
+		</form>
+	
+	
 	
 	<h2>Tarjouspyynnöt</h2>
 		<table>
@@ -561,10 +591,10 @@ EOT;
 	}//ison Iffin
 	
 	if($tarjous_muokkaa != ""){
-		$tarjousmuokataan = $_SESSION["muokattavaid"];
+		$tarjousmuokataan = $_SESSION["tarjous_muokattavaid"];
 		
 		
-		 $sql = "UPDATE `orders` SET `description` = '$tarjous_tyonkuvaus' WHERE `requestorder`.`id` = $tarjousmuokataan ";
+		 $sql = "UPDATE `requestorder` SET `description` = '$tarjous_tyonkuvaus' WHERE `requestorder`.`id` = $tarjousmuokataan ";
 		echo $sql;
 		if(mysqli_query($conn, $sql))
 		{
