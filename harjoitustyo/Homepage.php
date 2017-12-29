@@ -115,6 +115,7 @@ $status = "TILATTU";
 $hyvaksytty  = Tarkaste($conn, "hyvaksytty");
 $hylatty = Tarkaste($conn, "hylatty");
 
+
 if($hyvaksytty != ""){
 	$unixaika = time();
     $hyvaksyttyaika = date("Y-m-d",$unixaika);
@@ -353,20 +354,69 @@ EOT;
 	if($poisto_ok != ""){
 		echo "<p>poisto onnistui</p>";
 	}
-		
-	
-	
-	
-	
+
 	?>	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	<?php
+$tarjousmuokataan = Tarkaste($conn, "tarjousmuokataan");
+$tarjous_tyonkuvaus = Tarkaste($conn, "tarjous_tyonkuvaus");
+$tarjous_muokkaa = Tarkaste($conn, "tarjous_muokkaa");
+$tarjousmuokattavaid = Tarkaste($conn, "tarjousmuokattavaid");
+$tarjouspoista = Tarkaste($conn, "tarjouspoista");
+	?>
 	
 	<h2>Tarjouspyynnöt</h2>
 		<table>
 			<tr>
 				<th>Tarjouspyyntö</th>
-				<th>jättöpvm</th>
-				
+				<th>jättöpvm</th>		
 				<th>vastaamispvm</th>			
 				<th>Status</th>		
 				<th>Kommentti</th>	
@@ -374,7 +424,7 @@ EOT;
 				<th>Hyväksytty</th>
 				<th>Hylätty</th>			
 			</tr>
-		<?php $sql = "SELECT `id`, `customer_id`, `description`, `order_date`, `start_date`, `status`, `acception_date`, `rejection_date`, `comment`, `workhours`, `supplement`, `cost`,`finished_time` FROM `orders` WHERE `customer_id` = " . $_SESSION["kayttajatiedot"]["key_id"] . " "; 
+		<?php $sql = "SELECT `id`, `customer_id`, `description`, `order_date`, `start_date`, `status`, `acception_date`, `rejection_date`, `comment`, `workhours`, `supplement`, `cost`,`finished_time` FROM `requestorder` WHERE `customer_id` = " . $_SESSION["kayttajatiedot"]["key_id"] . " "; 
 		
 	//echo $sql;
 	$tulos = mysqli_query($conn, $sql);
@@ -407,7 +457,7 @@ EOT;
 				
 			
 			
-		$lisaysquery = "UPDATE `orders` SET `start_date` = '$aloitusaika' WHERE `orders`.`id` = $rivi[id]";	
+		$lisaysquery = "UPDATE `requestorder` SET `start_date` = '$aloitusaika' WHERE `requestorder`.`id` = $rivi[id]";	
 					
 		//echo $lisaysquery;
 			if(mysqli_query($conn,$lisaysquery)){
@@ -424,10 +474,10 @@ EOT;
 		 $unixaika = time();
          $valmisaika = date("Y-m-d",$unixaika);
 		
-		$valmissquery = "UPDATE `orders` SET `finished_time` = '$valmisaika' WHERE `orders`.`id` = ";	
+		$valmissquery = "UPDATE `requestorder` SET `finished_time` = '$valmisaika' WHERE `requestorder`.`id` = ";	
 		
 		
-		$valmissquery = "UPDATE `orders` SET `status` = 'VALMIS', `comment` = 'Hienosti meni', `workhours` = '2', `supplement` = 'tarvikkeita meni 10e', `cost` = '300e',`finished_time` = '$valmisaika' WHERE `orders`.`id` = $rivi[id]"; 
+		$valmissquery = "UPDATE `requestorder` SET `status` = 'VALMIS', `comment` = 'Hienosti meni', `workhours` = '2', `supplement` = 'tarvikkeita meni 10e', `cost` = '300e',`finished_time` = '$valmisaika' WHERE `requestorder`.`id` = $rivi[id]"; 
 		
 		
 		echo $valmissquery;
@@ -443,9 +493,9 @@ EOT;
 	}
 															
 	if($rivi["status"] == "TILATTU"){
-		echo "<td><a href=\"Homepage.php?muokattavaid=$rivi[id]\">Muokkaa</a> </td>";
+		echo "<td><a href=\"Homepage.php?tarjousmuokattavaid=$rivi[id]\">Muokkaa</a> </td>";
 		
-		echo "<td><a href=\"Homepage.php?poista=$rivi[id]\">Poista</a> </td>";
+		echo "<td><a href=\"Homepage.php?tarjouspoista=$rivi[id]\">Poista</a> </td>";
 	}
 					
 	
@@ -467,11 +517,11 @@ EOT;
 	
 	
 	
-		if($muokattavaid != ""){
+		if($tarjousmuokattavaid != ""){
 		$sql  = 
-		"SELECT `id`, `customer_id`, `description`, `order_date`, `start_date`, `status`, `acception_date`, `rejection_date`, `comment`, `workhours`, `supplement`, `cost` FROM `orders` WHERE `customer_id` = " . $_SESSION["kayttajatiedot"]["key_id"] . " AND id = $muokattavaid"; 
+		"SELECT `id`, `customer_id`, `description`, `order_date`, `start_date`, `status`, `acception_date`, `rejection_date`, `comment`, `workhours`, `supplement`, `cost` FROM `requestorder` WHERE `customer_id` = " . $_SESSION["kayttajatiedot"]["key_id"] . " AND id = $tarjousmuokattavaid"; 
 		//echo $sql;
-		$_SESSION["muokattavaid"] = $muokattavaid;
+		$_SESSION["tarjous_muokattavaid"] = $tarjousmuokattavaid;
 			
 			
 		$tulos = mysqli_query($conn, $sql);
@@ -486,10 +536,10 @@ EOT;
 		while ($rivi = mysqli_fetch_array($tulos, MYSQL_ASSOC)) {
 			echo "
 			<h1>Muokkaa </h1>
-			<form action=\"Homepage.php?muokataan\" method=\"get\">
-			Työnkuvaus : <input type=\"text\" name=\"tyonkuvaus\" value=\"$rivi[description]\"><br>
+			<form action=\"Homepage.php?tarjousmuokataan\" method=\"get\">
+			Työnkuvaus : <input type=\"text\" name=\"tarjous_tyonkuvaus\" value=\"$rivi[description]\"><br>
 	
-			<input type=\"submit\" value=\"Muokkaa\" name =\"muokkaa\">
+			<input type=\"submit\" value=\"Muokkaa\" name =\"tarjous_muokkaa\">
 	
 	      <input type=\"submit\" value=\"Peruuta\" name =\"\">
 		</form>	";
@@ -498,8 +548,8 @@ EOT;
 		
 	}//ison Iffin
 	
-	if($muokkaa != ""){
-		$muokkausid = $_SESSION["muokattavaid"];
+	if($tarjousmuokataan != ""){
+		$tarjousmuokataan = $_SESSION["muokattavaid"];
 		
 		
 		 $sql = "UPDATE `orders` SET `description` = '$tyonkuvaus' WHERE `orders`.`id` = $muokkausid ";
