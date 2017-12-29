@@ -50,7 +50,7 @@ $tarjouspyynto_kuvaus = Tarkaste($conn, "tarjouspyynto_kuvaus");
 $tarjouspyynto = Tarkaste($conn, "tarjouspyynto");
 
 $muokkaa = Tarkaste($conn, "muokkaa");
-//echo $_SESSION["muokattavaid"];
+
 ?>
 
 
@@ -64,8 +64,6 @@ $kayttajatunnus =$_SESSION["kayttajatiedot"]["kayttajatunnus"];
 
 $kayttajatiedothaku = "SELECT `key_id`,`name`,`address`,`billing_address`,`phone_number`,`email`,`apartment_type`,`apartment_area`,`property` FROM `customer` WHERE  `username` = '$kayttajatunnus'
 ";     
-
-//	SELECT `key_id`,`name`,`address`,`billing_address`,`phone_number`,`email`,`apartment_type`,`apartment_area`,`property` FROM `customer` WHERE 1
 
 
     $tulos = mysqli_query($conn, $kayttajatiedothaku);
@@ -102,9 +100,6 @@ $kayttajatiedothaku = "SELECT `key_id`,`name`,`address`,`billing_address`,`phone
   			}
 		} 
     }        
-//	SELECT `key_id`,`name`,`address`,`billing_address`,`phone_number`,`email`,`apartment_type`,`apartment_area`,`property` FROM `customer` WHERE 1
-
-//var_dump($_SESSION);
 
 $tyonkuvaus = Tarkaste($conn, "tyonkuvaus");
 
@@ -149,10 +144,7 @@ if($hylatty != ""){
 if($tilaus != "" && $tyonkuvaus != ""){
 			$tilausarray = array();
 			$tilausarray["kayttajaid"] = $_SESSION["kayttajatiedot"]["key_id"];
-			//echo $tilausarray["kayttajaid"];
-			//INSERT INTO `orders`(`customer_id`, `description`, `order_date`, `start_date`, `status`, `acception_date`, `rejection_date`, `comment`, `workhours`, `supplement`, `cost`) VALUES ([value-2],[value-3],[value-4],[value-5],[value-6],[value-7],[value-8],[value-9],[value-10],[value-11],[value-12])
-				
-				
+		
 				$tilausquery = "INSERT INTO `orders`(`customer_id`, `description`,`status`,`order_date`) VALUES ('" . $tilausarray["kayttajaid"] . "','$tyonkuvaus','$status','$tilausaika')";
 	
 	echo $tilausquery;
@@ -166,8 +158,6 @@ if($tilaus != "" && $tyonkuvaus != ""){
 		echo "feilas";
 	}
 }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -179,11 +169,7 @@ if($tilaus != "" && $tyonkuvaus != ""){
 <body>
 		<a href="muutos.php">Hei <?php echo $_SESSION["kayttajatiedot"]["name"]; ?>   tästä pääset  muuttamaan tietojasi</a><br><br>
 		
-		
 		<a href="Homepage.php?kirjaudu_ulos=1">Kirjaudu ulos</a>
-
-		
-
 		<h1>Tilaa työ</h1>
 		<form action="Homepage.php" method="get">
 			Työnkuvaus : <input type="text" name="tyonkuvaus"  ><br>
@@ -194,9 +180,7 @@ if($tilaus != "" && $tyonkuvaus != ""){
 		<h1>Tee tarjouspyyntö</h1>
 		<form action="Homepage.php" method="get">
 			Tarjouspyyntö : <input type="text" name="tarjouspyynto_kuvaus"  ><br>
-			
-
-			
+	
 			<input type="submit" value="Tee tarjouspyyntö" name="tarjouspyynto">
 		</form>
 		
@@ -308,45 +292,6 @@ EOT;
 		
 	<?php
 	
-//	if($muokattavaid != ""){
-//		$sql  = 
-//		"SELECT `id`, `customer_id`, `description`, `order_date`, `start_date`, `status`, `acception_date`, `rejection_date`, `comment`, `workhours`, `supplement`, `cost` FROM `orders` WHERE `customer_id` = " . $_SESSION["kayttajatiedot"]["key_id"] . " AND id = $muokattavaid"; 
-//		echo $sql;
-//		
-//		$tulos = mysqli_query($conn, $sql);
-//	if ( !$tulos )
-//	{
-//		echo "Kysely epäonnistui " . mysqli_error($conn);
-//	}
-//	else
-//	{
-//        
-//		
-//		while ($rivi = mysqli_fetch_array($tulos, MYSQL_ASSOC)) {
-//			echo "
-//			<h1></h1>
-//			<form action=\"Homepage.php?muokataan\" method=\"get\">
-//			Työnkuvaus : <input type=\"text\" name=\"tyonkuvaus\" value=\"$rivi[description]\"><br>
-//			
-//			Aloitussaika : <input type=\"text\" name=\"aloitusaika\" value=\"$rivi[order_date]\"><br>
-//			
-//			Kommentti : <input type=\"text\" name=\"kommentti\" value=\"$rivi[comment]\"><br>
-//			
-//			Tunnit : <input type=\"text\" name=\"tunnit\" value=\"$rivi[workhours]\"><br>
-//			
-//			Tarvikkeet : <input type=\"text\" name=\"tarvikkeet\" value=\"$rivi[supplement]\"><br>
-//			
-//			Hinta : <input type=\"text\" name=\"hinta\" value=\"$rivi[cost]\"><br>
-//			
-//			<input type=\"submit\" value=\"Muokkaa\" name =\"muokkaa\">
-//	
-//	      <input type=\"submit\" value=\"Peruuta\" name =\"\">
-//		</form>	";
-//		}
-//	} 
-//		
-//	}//ison Iffin
-	
 	/*
 				$rivi[description]</td>
 				$rivi[order_date]</td>
@@ -415,6 +360,164 @@ EOT;
 	
 	?>	
 	
+	
+	<h2>Tarjouspyynnöt</h2>
+		<table>
+			<tr>
+				<th>Tarjouspyyntö</th>
+				<th>jättöpvm</th>
+				
+				<th>vastaamispvm</th>			
+				<th>Status</th>		
+				<th>Kommentti</th>	
+				<th>Hinta</th>
+				<th>Hyväksytty</th>
+				<th>Hylätty</th>			
+			</tr>
+		<?php $sql = "SELECT `id`, `customer_id`, `description`, `order_date`, `start_date`, `status`, `acception_date`, `rejection_date`, `comment`, `workhours`, `supplement`, `cost`,`finished_time` FROM `orders` WHERE `customer_id` = " . $_SESSION["kayttajatiedot"]["key_id"] . " "; 
+		
+	//echo $sql;
+	$tulos = mysqli_query($conn, $sql);
+	   
+	if ( !$tulos )
+	{
+		echo "Kysely epäonnistui " . mysqli_error($conn);
+	}
+	else
+	{
+        
+		
+		while ($rivi = mysqli_fetch_array($tulos, MYSQL_ASSOC)) { echo <<<EOT
+<tr>
+				<td>$rivi[description]</td>
+				<td>$rivi[order_date]</td>
+				
+				<td>$rivi[finished_time]</td>
+				<td>$rivi[status]</td>
+				<td>$rivi[comment]</td>				
+				<td>$rivi[cost]</td>
+				<td>$rivi[acception_date]</td>
+				<td>$rivi[rejection_date]</td>
+			
+EOT;
+		if($rivi["status"] == "ALOITETTU"){
+			
+		 $unixaika = time();
+         $aloitusaika = date("Y-m-d",$unixaika);
+				
+			
+			
+		$lisaysquery = "UPDATE `orders` SET `start_date` = '$aloitusaika' WHERE `orders`.`id` = $rivi[id]";	
+					
+		//echo $lisaysquery;
+			if(mysqli_query($conn,$lisaysquery)){
+				echo "aloitusaika onnistu";
+			}
+			else{
+				echo "aloitusaika feilas";
+			}
+			
+	}
+		
+	if($rivi["status"] == "VALMIS"){
+			
+		 $unixaika = time();
+         $valmisaika = date("Y-m-d",$unixaika);
+		
+		$valmissquery = "UPDATE `orders` SET `finished_time` = '$valmisaika' WHERE `orders`.`id` = ";	
+		
+		
+		$valmissquery = "UPDATE `orders` SET `status` = 'VALMIS', `comment` = 'Hienosti meni', `workhours` = '2', `supplement` = 'tarvikkeita meni 10e', `cost` = '300e',`finished_time` = '$valmisaika' WHERE `orders`.`id` = $rivi[id]"; 
+		
+		
+		echo $valmissquery;
+			if(mysqli_query($conn,$valmissquery)){
+				echo "valmis onnistu";
+			}
+			else{
+				echo "valmis feilas";
+			}
+		echo "<td><a href=\"Homepage.php?hyvaksytty=$rivi[id]\">hyväksy</a></td>";
+		echo "<td><a href=\"Homepage.php?hylatty=$rivi[id]\">hylkää</a></td>";
+				
+	}
+															
+	if($rivi["status"] == "TILATTU"){
+		echo "<td><a href=\"Homepage.php?muokattavaid=$rivi[id]\">Muokkaa</a> </td>";
+		
+		echo "<td><a href=\"Homepage.php?poista=$rivi[id]\">Poista</a> </td>";
+	}
+					
+	
+															
+															
+		echo "</tr>";
+  			}
+		} 
+    
+	
+	
+	
+	?>
+			
+		</table>
+		
+	<?php
+	
+	
+	
+	
+		if($muokattavaid != ""){
+		$sql  = 
+		"SELECT `id`, `customer_id`, `description`, `order_date`, `start_date`, `status`, `acception_date`, `rejection_date`, `comment`, `workhours`, `supplement`, `cost` FROM `orders` WHERE `customer_id` = " . $_SESSION["kayttajatiedot"]["key_id"] . " AND id = $muokattavaid"; 
+		//echo $sql;
+		$_SESSION["muokattavaid"] = $muokattavaid;
+			
+			
+		$tulos = mysqli_query($conn, $sql);
+	if ( !$tulos )
+	{
+		echo "Kysely epäonnistui " . mysqli_error($conn);
+	}
+	else
+	{
+        
+		
+		while ($rivi = mysqli_fetch_array($tulos, MYSQL_ASSOC)) {
+			echo "
+			<h1>Muokkaa </h1>
+			<form action=\"Homepage.php?muokataan\" method=\"get\">
+			Työnkuvaus : <input type=\"text\" name=\"tyonkuvaus\" value=\"$rivi[description]\"><br>
+	
+			<input type=\"submit\" value=\"Muokkaa\" name =\"muokkaa\">
+	
+	      <input type=\"submit\" value=\"Peruuta\" name =\"\">
+		</form>	";
+		}
+	} 
+		
+	}//ison Iffin
+	
+	if($muokkaa != ""){
+		$muokkausid = $_SESSION["muokattavaid"];
+		
+		
+		 $sql = "UPDATE `orders` SET `description` = '$tyonkuvaus' WHERE `orders`.`id` = $muokkausid ";
+		echo $sql;
+		if(mysqli_query($conn, $sql))
+		{
+			echo "päivitys onnistui!";
+		}
+		else{
+			echo "päivittäminen ei onnistunut";
+		}
+	}
+	
+	if($poisto_ok != ""){
+		echo "<p>poisto onnistui</p>";
+	}
+	
+	?>
 		
 		
 		
