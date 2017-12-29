@@ -440,6 +440,8 @@ $tarjous_hylatty = Tarkaste($conn, "tarjous_hylatty");
 		echo "feilas";
 	}
 	
+	$sql = "";	
+		
 }
 
 if($tarjous_hylatty != ""){
@@ -548,10 +550,10 @@ EOT;
 		 $unixaika = time();
          $valmisaika = date("Y-m-d",$unixaika);
 		
-		$valmissquery = "UPDATE `requestorder` SET `finished_time` = '$valmisaika' WHERE `requestorder`.`id` = ";	
 		
 		
-		$valmissquery = "UPDATE `requestorder` SET `status` = 'VALMIS', `comment` = 'Hienosti meni', `workhours` = '2', `supplement` = 'tarvikkeita meni 10e', `cost` = '300e',`finished_time` = '$valmisaika' WHERE `requestorder`.`id` = $rivi[id]"; 
+		
+		$valmissquery = "UPDATE `requestorder` SET `status` = 'VASTATTU', `comment` = 'tarjotaan', `workhours` = '2', `supplement` = 'tarvikkeita meni 10e', `cost` = '300e',`finished_time` = '$valmisaika' WHERE `requestorder`.`id` = $rivi[id]"; 
 		
 		
 		echo $valmissquery;
