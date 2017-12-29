@@ -28,7 +28,7 @@ function Tarkaste($conn,$muuttuja){
 }
 
 $poista = Tarkaste($conn, "poista");
-
+$tarjouspoista = Tarkaste($conn, "tarjouspoista");
 if($poista != ""){
 
 		 $sql = "DELETE FROM `orders` WHERE `orders`.`id` = $poista";
@@ -42,7 +42,19 @@ if($poista != ""){
 			header('Location: Homepage.php?poisto_feilas');
 		}
 	}
+if($tarjouspoista != ""){
 
+		 $sql = "DELETE FROM `requestorder` WHERE `requestorder`.`id` = $tarjouspoista";
+		//echo $sql;
+		if(mysqli_query($conn, $sql))
+		{
+			header('Location: Homepage.php?tarjouspoisto_ok=1');
+			
+		}
+		else{
+			header('Location: Homepage.php?tarjouspoisto_feilas');
+		}
+	}
 
 $muokattavaid = Tarkaste($conn, "muokattavaid");
 $poisto_ok = Tarkaste($conn, "poisto_ok");
@@ -409,7 +421,7 @@ $tarjousmuokataan = Tarkaste($conn, "tarjousmuokataan");
 $tarjous_tyonkuvaus = Tarkaste($conn, "tarjous_tyonkuvaus");
 $tarjous_muokkaa = Tarkaste($conn, "tarjous_muokkaa");
 $tarjousmuokattavaid = Tarkaste($conn, "tarjousmuokattavaid");
-$tarjouspoista = Tarkaste($conn, "tarjouspoista");
+
 	?>
 	
 	<h2>Tarjouspyynnöt</h2>
@@ -535,7 +547,7 @@ EOT;
 		
 		while ($rivi = mysqli_fetch_array($tulos, MYSQL_ASSOC)) {
 			echo "
-			<h1>Muokkaa </h1>
+			<h1>Muokkaa tarjouspyyntöä</h1>
 			<form action=\"Homepage.php?tarjousmuokataan\" method=\"get\">
 			Työnkuvaus : <input type=\"text\" name=\"tarjous_tyonkuvaus\" value=\"$rivi[description]\"><br>
 	
@@ -548,11 +560,11 @@ EOT;
 		
 	}//ison Iffin
 	
-	if($tarjousmuokataan != ""){
+	if($tarjous_muokkaa != ""){
 		$tarjousmuokataan = $_SESSION["muokattavaid"];
 		
 		
-		 $sql = "UPDATE `orders` SET `description` = '$tyonkuvaus' WHERE `orders`.`id` = $muokkausid ";
+		 $sql = "UPDATE `orders` SET `description` = '$tarjous_tyonkuvaus' WHERE `requestorder`.`id` = $tarjousmuokataan ";
 		echo $sql;
 		if(mysqli_query($conn, $sql))
 		{
@@ -563,7 +575,7 @@ EOT;
 		}
 	}
 	
-	if($poisto_ok != ""){
+	if($tarjouspoista != ""){
 		echo "<p>poisto onnistui</p>";
 	}
 	
