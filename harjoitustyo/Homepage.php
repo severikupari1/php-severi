@@ -421,7 +421,39 @@ $tarjous_muokkaa = Tarkaste($conn, "tarjous_muokkaa");
 $tarjousmuokattavaid = Tarkaste($conn, "tarjousmuokattavaid");
 $tarjouspyynto = Tarkaste($conn, "tarjouspyynto");
 $tarjouspyynto_kuvaus = Tarkaste($conn, "tarjouspyynto_kuvaus");
+$tarjous_hyvaksytty = Tarkaste($conn, "tarjous_hyvaksytty");
+$tarjous_hylatty = Tarkaste($conn, "tarjous_hylatty");
+	
+	
+	
+	if($tarjous_hyvaksytty != ""){
+	$unixaika = time();
+    $hyvaksyttyaika = date("Y-m-d",$unixaika);
+		
+	$sql = "	UPDATE `requestorder` SET `status` = 'HYVAKSYTTY', `acception_date` = '$hyvaksyttyaika' WHERE `requestorder`.`id` = $tarjous_hyvaksytty";
+	
+	
+	if(mysqli_query($conn,$sql)){
+		echo "onnistu";
+	}
+	else{
+		echo "feilas";
+	}
+	
+}
 
+if($tarjous_hylatty != ""){
+	$unixaika = time();
+    $hylattyaika = date("Y-m-d",$unixaika);
+		
+	$sql = "	UPDATE `requestorder` SET `status` = 'HYLATTY', `rejection_date` = '$hylattyaika' WHERE `requestorder`.`id` = $tarjous_hylatty";
+	
+	mysqli_query($conn,$sql);
+	
+}
+	
+	
+	
 	
 	if($tarjouspyynto != "" && $tarjouspyynto_kuvaus != ""){
 			$tilausarray = array();
@@ -511,7 +543,7 @@ EOT;
 			
 	}
 		
-	if($rivi["status"] == "VALMIS"){
+	if($rivi["status"] == "VASTATTU"){
 			
 		 $unixaika = time();
          $valmisaika = date("Y-m-d",$unixaika);
@@ -529,12 +561,12 @@ EOT;
 			else{
 				echo "valmis feilas";
 			}
-		echo "<td><a href=\"Homepage.php?hyvaksytty=$rivi[id]\">hyväksy</a></td>";
-		echo "<td><a href=\"Homepage.php?hylatty=$rivi[id]\">hylkää</a></td>";
+		echo "<td><a href=\"Homepage.php?tarjous_hyvaksytty=$rivi[id]\">hyväksy</a></td>";
+		echo "<td><a href=\"Homepage.php?tarjous_hylatty=$rivi[id]\">hylkää</a></td>";
 				
 	}
 															
-	if($rivi["status"] == "TILATTU"){
+	if($rivi["status"] == "JATETTY"){
 		echo "<td><a href=\"Homepage.php?tarjousmuokattavaid=$rivi[id]\">Muokkaa</a> </td>";
 		
 		echo "<td><a href=\"Homepage.php?tarjouspoista=$rivi[id]\">Poista</a> </td>";
