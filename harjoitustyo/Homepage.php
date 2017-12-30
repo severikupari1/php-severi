@@ -11,7 +11,7 @@ unset($_SESSION['kirjautuminen']);
 	header('Location: Login.php?kirjauduit_ulos');
 }
 
- 
+  
 
 function Tarkaste($conn,$muuttuja){
        
@@ -262,7 +262,9 @@ EOT;
 		$valmissquery = "UPDATE `orders` SET `finished_time` = '$valmisaika' WHERE `orders`.`id` = ";	
 		
 		
-		$valmissquery = "UPDATE `orders` SET `status` = 'VALMIS', `comment` = 'Hienosti meni', `workhours` = '2', `supplement` = 'tarvikkeita meni 10e', `cost` = '300e',`finished_time` = '$valmisaika' WHERE `orders`.`id` = $rivi[id]"; 
+		$valmissquery = "UPDATE `finished_time` = '$valmisaika' WHERE `orders`.`id` = $rivi[id]"; 
+		
+		//`orders` SET `status` = 'VALMIS', `comment` = 'Hienosti meni', `workhours` = '2', `supplement` = 'tarvikkeita meni 10e', `cost` = '300e', ei käytös
 		
 		
 		echo $valmissquery;
@@ -347,7 +349,7 @@ EOT;
 		
 		
 		 $sql = "UPDATE `orders` SET `description` = '$tyonkuvaus' WHERE `orders`.`id` = $muokkausid ";
-		echo $sql;
+		//echo $sql;
 		if(mysqli_query($conn, $sql))
 		{
 			echo "päivitys onnistui!";
@@ -442,7 +444,7 @@ $tarjous_hylatty = Tarkaste($conn, "tarjous_hylatty");
 	
 	$sql = "SELECT `id`, `customer_id`, `description`, `order_date`, `start_date`, `status`, `acception_date`, `rejection_date`, `comment`, `workhours`, `supplement`, `cost`,`finished_time` FROM `requestorder` WHERE `customer_id` = " . $_SESSION["kayttajatiedot"]["key_id"] . " AND `requestorder`.`id` = $tarjous_hyvaksytty"; 
 		
-	echo $sql;
+	//echo $sql;
 	$tulos = mysqli_query($conn, $sql);
 	   
 	if ( !$tulos )
@@ -455,23 +457,41 @@ $tarjous_hylatty = Tarkaste($conn, "tarjous_hylatty");
 		
 		while ($rivi = mysqli_fetch_array($tulos, MYSQL_ASSOC)) { 
 			
-			$tarjous_description =$rivi[description];
-			$tarjous_order_date =	$rivi[order_date];			
-			$tarjous_finished_time =	$rivi[finished_time];
-			$tarjous_status =	$rivi[status];
-			$tarjous_comment =	$rivi[comment]	;			
-			$tarjous_cost =	$rivi[cost];
-			$tarjous_acception_date =	$rivi[acception_date];
-			$tarjous_rejection_date =	$rivi[rejection_date];					
+			$tarjous_description =$rivi["description"];
+			$tarjous_order_date =	$rivi["order_date"];			
+			$tarjous_finished_time =	$rivi["finished_time"];
+			$tarjous_status =	$rivi["status"];
+			$tarjous_comment =	$rivi["comment"]	;			
+			$tarjous_cost =	$rivi["cost"];
+			$tarjous_acception_date =	$rivi["acception_date"];
+			$tarjous_rejection_date =	$rivi["rejection_date"];					
 	}
 	$tilausarray = array();
 			$tilausarray["kayttajaid"] = $_SESSION["kayttajatiedot"]["key_id"];
 		
 		
+		/*
+		$sql = "INSERT INTO `orders`( `customer_id`, `description`, `order_date`,  `status`,   `comment`,   `cost` ) VALUES ('$tilausarray[kayttajaid]','$tarjous_description','$tarjous_order_date','TILATTU','$tarjous_comment','$tarjous_cost')";
+		*/
 		
-		$sql = "INSERT INTO `orders`( `customer_id`, `description`, `order_date`,  `status`,   `comment`,   `cost` ) VALUES (`$tilausarray[kayttajaid]`,`$tarjous_description`,`$tarjous_order_date`,`TILATTU`,`$tarjous_comment`,`$tarjous_cost`)";
+		$sql = "INSERT INTO `orders` ( `customer_id`, `description`, `order_date`, `start_date`, `status`, `acception_date`, `rejection_date`, `comment`, `workhours`, `supplement`, `cost`, `finished_time`) VALUES ( '$tilausarray[kayttajaid]', '$tarjous_description', '$tarjous_order_date', NULL, 'TILATTU', NULL, NULL, '$tarjous_comment', NULL, NULL, '$tarjous_cost', NULL)";
 		
-		echo $sql;
+		
+		/*
+		INSERT INTO `orders` ( `customer_id`, `description`, `order_date`, `start_date`, `status`, `acception_date`, `rejection_date`, `comment`, `workhours`, `supplement`, `cost`, `finished_time`) VALUES ( '$tilausarray[kayttajaid]', '$tarjous_description', '$tarjous_order_date', NULL, 'TILATTU', NULL, NULL, '$tarjous_comment', NULL, NULL, '$tarjous_cost', NULL);
+		*/
+		
+		
+		//echo $sql;
+		
+		if(mysqli_query($conn,$sql)){
+			echo "onnistu lisäys ";
+		}
+		else{
+			echo "feilas lisäys ";
+		}
+		
+		
    }
 		
 	}
@@ -496,7 +516,7 @@ if($tarjous_hylatty != ""){
 		
 				$tilausquery = "INSERT INTO `requestorder`(`customer_id`, `description`,`status`,`order_date`) VALUES ('" . $tilausarray["kayttajaid"] . "','$tarjouspyynto_kuvaus','JATETTY','$tilausaika')";
 	
-	echo $tilausquery;
+	//echo $tilausquery;
 	
 	if(mysqli_query($conn,$tilausquery))
 	{
@@ -588,7 +608,7 @@ EOT;
 		$valmissquery = "UPDATE `requestorder` SET `status` = 'VASTATTU', `comment` = 'tarjotaan', `workhours` = '2', `supplement` = 'tarvikkeita meni 10e', `cost` = '300e',`finished_time` = '$valmisaika' WHERE `requestorder`.`id` = $rivi[id]"; 
 		
 		
-		echo $valmissquery;
+		//echo $valmissquery;
 			if(mysqli_query($conn,$valmissquery)){
 				echo "valmis onnistu";
 			}
@@ -661,7 +681,7 @@ EOT;
 		
 		
 		 $sql = "UPDATE `requestorder` SET `description` = '$tarjous_tyonkuvaus' WHERE `requestorder`.`id` = $tarjousmuokataan ";
-		echo $sql;
+		//echo $sql;
 		if(mysqli_query($conn, $sql))
 		{
 			echo "päivitys onnistui!";
