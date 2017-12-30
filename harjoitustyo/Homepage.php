@@ -610,18 +610,24 @@ if($tarjous_hylatty != ""){
 	{
         
 		
-		while ($rivi = mysqli_fetch_array($tulos, MYSQL_ASSOC)) { echo <<<EOT
-<tr>
-				<td>$rivi[description]</td>
-				<td>$rivi[order_date]</td>			
-				<td>$rivi[finished_time]</td>
-				<td>$rivi[status]</td>
-				<td>$rivi[comment]</td>				
-				<td>$rivi[cost]</td>
-				<td>$rivi[acception_date]</td>
-				<td>$rivi[rejection_date]</td>
-			
-EOT;
+		while ($rivi = mysqli_fetch_array($tulos, MYSQL_ASSOC)) { 
+					
+			echo "<tr>";			
+			echo "<td>$rivi[description]</td>";	
+						Aikamuutos($rivi["order_date"]);
+						
+						Aikamuutos($rivi["finished_time"]);
+						
+						echo "<td>$rivi[status]</td>";
+																																																											
+																																																											
+echo "<td>$rivi[comment]</td>";																																																									
+echo "<td>$rivi[cost]</td>";
+						
+						
+						Aikamuutos($rivi["acception_date"]);
+						Aikamuutos($rivi["rejection_date"]);
+																																																										
 		if($rivi["status"] == "ALOITETTU"){
 			
 		 $unixaika = time();
