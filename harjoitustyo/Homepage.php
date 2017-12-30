@@ -218,23 +218,44 @@ if($tilaus != "" && $tyonkuvaus != ""){
 	}
 	else
 	{
-        
+   
+					//  //echo $unixaktivointi;
+						
+       //$muokattuluontipaiva= str_replace("-",".",$aikamuutos); 
+   	
+						//echo $muokattuluontipaiva;
+					
+					
 		
-		while ($rivi = mysqli_fetch_array($tulos, MYSQL_ASSOC)) { echo <<<EOT
-<tr>
-				<td>$rivi[description]</td>
-				<td>$rivi[order_date]</td>
-				<td>$rivi[start_date]</td>
-				<td>$rivi[finished_time]</td>
-				<td>$rivi[status]</td>
-				<td>$rivi[comment]</td>
-				<td>$rivi[workhours]</td>
-				<td>$rivi[supplement]</td>
-				<td>$rivi[cost]</td>
-				<td>$rivi[acception_date]</td>
-				<td>$rivi[rejection_date]</td>
-			
-EOT;
+		while ($rivi = mysqli_fetch_array($tulos, MYSQL_ASSOC)) { //echo <<<EOT
+//<tr>
+//				<td>$rivi[description]</td>
+//				<td>$rivi[order_date]</td>
+//				<td>$rivi[start_date]</td>
+//				<td>$rivi[finished_time]</td>
+//				<td>$rivi[status]</td>
+//				<td>$rivi[comment]</td>
+//				<td>$rivi[workhours]</td>
+//				<td>$rivi[supplement]</td>
+//				<td>$rivi[cost]</td>
+//				<td>$rivi[acception_date]</td>
+//				<td>$rivi[rejection_date]</td>
+//			
+//EOT;
+						
+			echo "<tr>";			
+			echo "<td>$rivi[description]</td>";
+						$aikamuutos = $rivi["order_date"];
+						
+						$unixaktivointi = strtotime($aikamuutos);
+    
+						
+						echo date("d.m.Y",$unixaktivointi);			
+			   echo "<td>";
+						echo	date("d.m.Y",$unixaktivointi);
+						
+						echo "</td>";									
+															
 		if($rivi["status"] == "ALOITETTU"){
 			
 		 $unixaika = time();
