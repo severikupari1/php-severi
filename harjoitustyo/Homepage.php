@@ -660,10 +660,10 @@ echo "<td>$rivi[cost]</td>";
 		
 		//echo $valmissquery;
 			if(mysqli_query($conn,$valmissquery)){
-				echo "valmis onnistu";
+				//echo "valmis onnistu";
 			}
 			else{
-				echo "valmis feilas";
+				//echo "valmis feilas";
 			}
 		echo "<td><a href=\"Homepage.php?tarjous_hyvaksytty=$rivi[id]\">hyväksy</a></td>";
 		echo "<td><a href=\"Homepage.php?tarjous_hylatty=$rivi[id]\">hylkää</a></td>";

@@ -1,6 +1,6 @@
 <?php session_start();
 if(!isset($_SESSION["kirjautuminen"])){
-	header('Location: Login.php?takaisin');
+	 header('Location: Login.php?takaisin');
 } 
 require_once("db.inc"); 
 
@@ -71,7 +71,7 @@ if($muutos != ""){
 		echo "Kysely epäonnistui " . mysqli_error($conn);
 	}
 	else{
-		echo "onnistu";
+		echo "Muokkaus onnistui";
 	}
 	
 	if(isset($_SESSION["kayttajatiedot"])){
@@ -96,7 +96,7 @@ $kayttajatiedothaku = "SELECT `key_id`,`name`,`address`,`billing_address`,`phone
 	else
 	{
         
-		echo "haetaan kannasta";
+		//echo "haetaan kannasta";
 		while ($rivi = mysqli_fetch_array($tulos, MYSQL_ASSOC)) { 
 			
 			$_SESSION["kayttajatiedot"]["key_id"] = $rivi["key_id"];
