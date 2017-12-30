@@ -11,6 +11,20 @@ unset($_SESSION['kirjautuminen']);
 	header('Location: Login.php?kirjauduit_ulos');
 }
 
+function Aikamuutos($param){
+				//$rivi["order_date"];
+				
+				if($param != ""){
+								$aikamuutos = $param;
+				
+						$unixaktivointi = strtotime($aikamuutos);
+		
+			   echo "<td>";
+						echo	date("d.m.Y",$unixaktivointi);
+						echo "</td>";	
+				}
+						
+}
   
 
 function Tarkaste($conn,$muuttuja){
@@ -219,11 +233,7 @@ if($tilaus != "" && $tyonkuvaus != ""){
 	else
 	{
    
-					//  //echo $unixaktivointi;
-						
-       //$muokattuluontipaiva= str_replace("-",".",$aikamuutos); 
-   	
-						//echo $muokattuluontipaiva;
+					
 					
 					
 		
@@ -245,16 +255,25 @@ if($tilaus != "" && $tyonkuvaus != ""){
 						
 			echo "<tr>";			
 			echo "<td>$rivi[description]</td>";
-						$aikamuutos = $rivi["order_date"];
 						
-						$unixaktivointi = strtotime($aikamuutos);
-    
+						Aikamuutos($rivi["order_date"]);
+						Aikamuutos($rivi["start_date"]);
+						Aikamuutos($rivi["finished_time"]);
 						
-						echo date("d.m.Y",$unixaktivointi);			
-			   echo "<td>";
-						echo	date("d.m.Y",$unixaktivointi);
+						echo 				"<td>$rivi[status]</td>";
+echo 				"<td>$rivi[comment]</td>";
+echo 				"<td>$rivi[workhours]</td>";
+echo 				"<td>$rivi[supplement]</td>";
+echo 				"<td>$rivi[cost]</td>";
 						
-						echo "</td>";									
+						
+						
+						
+						Aikamuutos($rivi["acception_date"]);
+						Aikamuutos($rivi["rejection_date"]);
+						
+				//$rivi["order_date"];
+												
 															
 		if($rivi["status"] == "ALOITETTU"){
 			
