@@ -480,10 +480,10 @@ $tarjous_hylatty = Tarkaste($conn, "tarjous_hylatty");
 	
 	
 	if(mysqli_query($conn,$sql)){
-		echo "onnistu";
+		//echo "onnistu";
 	}
 	else{
-		echo "feilas";
+		//echo "feilas";
 	}
 	
 	$sql = "SELECT `id`, `customer_id`, `description`, `order_date`, `start_date`, `status`, `acception_date`, `rejection_date`, `comment`, `workhours`, `supplement`, `cost`,`finished_time` FROM `requestorder` WHERE `customer_id` = " . $_SESSION["kayttajatiedot"]["key_id"] . " AND `requestorder`.`id` = $tarjous_hyvaksytty"; 
