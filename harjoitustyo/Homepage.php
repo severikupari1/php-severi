@@ -23,6 +23,10 @@ function Aikamuutos($param){
 						echo	date("d.m.Y",$unixaktivointi);
 						echo "</td>";	
 				}
+				else{
+								echo "<td>";
+								echo "</td>";
+				}
 						
 }
   
