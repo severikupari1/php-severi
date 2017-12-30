@@ -1,6 +1,6 @@
 <?php session_start();
 if(!isset($_SESSION["kirjautuminen"])){
-	//header('Location: Login.php?takaisin');
+	header('Location: Login.php?takaisin');
 } 
 require_once("db.inc"); 
 
