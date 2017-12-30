@@ -21,7 +21,7 @@ if(isset($_GET["kirjauduit_ulos"])){
 
 
 
-var_dump($_SESSION);
+//var_dump($_SESSION);
 
 //print_r($_SESSION);
 ?>
