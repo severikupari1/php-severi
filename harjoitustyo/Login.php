@@ -31,6 +31,7 @@ if(isset($_GET["kirjauduit_ulos"])){
 <head>
     <meta charset="UTF-8">
     <title>Kirjautuminen</title>
+    <link rel="stylesheet" href="Login.css">
 </head>
 <body>
     <?php 
@@ -45,8 +46,8 @@ if(isset($_GET["kirjauduit_ulos"])){
 
     <form action="Login-check.php" method="get"> <br>
     Käyttäjätunnus: <input type="text" name="kayttajatunnus" value="<?php Tulostaja("kayttajatunnus"); ?>">    <br>
-    Salasana : <input type="text" name="salasana" value="<?php ?>"> <br>
-    Salasana uudestaan : <input type="text" name="salasanauudelleen" value="<?php ?>"> <br>
+    Salasana : <input type="password" name="salasana" value="<?php ?>"> <br>
+    Salasana uudestaan : <input type="password" name="salasanauudelleen" value="<?php ?>"> <br>
     Nimi : <input type="text" name="nimi" value="<?php Tulostaja("nimi"); ?>"> <br>
     Käyntiosoite:    <input type="text" name="kayntiosoite" value="<?php Tulostaja("kayntiosoite"); ?>"> <br>
     Laskutusosoite:    <input type="text" name="laskutusosoite" value="<?php Tulostaja("laskutusosoite"); ?>"> <br>
@@ -90,7 +91,7 @@ if(isset($_GET["kirjauduit_ulos"])){
     </h1>
     <form action="Login-check.php" method="get">
     Käyttäjätunnnus: <input type="text" name="kayttajatunnuscheck" > <br>
-    Salasana : <input type="text" name="salasanacheck" ><br>
+    Salasana : <input type="password" name="salasanacheck" ><br>
     <input type="submit" value="Kirjaudu sisään" name="login">
     </form>
     <?php if(isset($_GET["kirjautuminenfeilas"])){

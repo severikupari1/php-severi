@@ -139,7 +139,7 @@ $hinta = Tarkaste($conn, "hinta");
 $tilaus = Tarkaste($conn, "tilaus");
 $unixaika = time();
 $tilausaika = date("Y-m-d",$unixaika);
-echo $tilausaika;
+//echo $tilausaika;
 $status = "TILATTU";
 $hyvaksytty  = Tarkaste($conn, "hyvaksytty");
 $hylatty = Tarkaste($conn, "hylatty");
