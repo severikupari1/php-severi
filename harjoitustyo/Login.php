@@ -42,9 +42,10 @@ if(isset($_GET["kirjauduit_ulos"])){
     } 
     ?>
 
-    <h1>Rekisteröinti</h1>
+    
 
-    <form action="Login-check.php" method="get"> <br>
+    <form class="dark-matter" action="Login-check.php" method="get"> <br>
+    <h1>Rekisteröinti</h1>
     Käyttäjätunnus: <input type="text" name="kayttajatunnus" value="<?php Tulostaja("kayttajatunnus"); ?>">    <br>
     Salasana : <input type="password" name="salasana" value="<?php ?>"> <br>
     Salasana uudestaan : <input type="password" name="salasanauudelleen" value="<?php ?>"> <br>
@@ -73,7 +74,7 @@ if(isset($_GET["kirjauduit_ulos"])){
                      <br>
        Asuntosi pinta-ala: <input type="text" name="asuntopintala"  value="<?php Tulostaja("asuntopintala"); ?>">  <br>
        Tonttisi pinta-ala <input type="text" name="tonttipintala"  value="<?php Tulostaja("tonttipintala");  ?>">  <br>
-        <input type="submit" value="rekisteröi" name="rekisteroi" > <br>
+        <input class="button" type="submit" value="rekisteröi" name="rekisteroi" > <br>
     </form>
     <?php 
         if(isset($_GET["salasanaeitasmaa"])){
@@ -87,12 +88,13 @@ if(isset($_GET["kirjauduit_ulos"])){
     }
 	
     ?>
+    br
+    <form class="dark-matter" action="Login-check.php" method="get">
     <h1>Sisäänkirjautuminen
     </h1>
-    <form action="Login-check.php" method="get">
     Käyttäjätunnnus: <input type="text" name="kayttajatunnuscheck" > <br>
     Salasana : <input type="password" name="salasanacheck" ><br>
-    <input type="submit" value="Kirjaudu sisään" name="login">
+    <input type="submit" class="button" value="Kirjaudu sisään" name="login">
     </form>
     <?php if(isset($_GET["kirjautuminenfeilas"])){
         echo "<p>käyttäjätunnus tai salasana väärin!</p>";
