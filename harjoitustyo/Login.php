@@ -88,7 +88,7 @@ if(isset($_GET["kirjauduit_ulos"])){
     }
 	
     ?>
-    br
+    <br>
     <form class="dark-matter" action="Login-check.php" method="get">
     <h1>Sisäänkirjautuminen
     </h1>

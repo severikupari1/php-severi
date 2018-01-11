@@ -195,6 +195,7 @@ if($tilaus != "" && $tyonkuvaus != ""){
 <head>
 	<meta charset="UTF-8">
 	<title>Päänäyttö </title>
+	<link rel="stylesheet" href="homepage.css">
 </head>
 <body>
 		<a href="muutos.php">Hei <?php echo $_SESSION["kayttajatiedot"]["name"]; ?>   tästä pääset  muuttamaan tietojasi</a><br><br>
