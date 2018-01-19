@@ -99,6 +99,9 @@ if(isset($_GET["kirjauduit_ulos"])){
     <?php if(isset($_GET["kirjautuminenfeilas"])){
         echo "<p>käyttäjätunnus tai salasana väärin!</p>";
     } ?>
+
+
+    <img src="" alt="" srcset="">
     
 </body>
 </html>
