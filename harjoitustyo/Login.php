@@ -101,7 +101,7 @@ if(isset($_GET["kirjauduit_ulos"])){
     } ?>
     <a href="kuva.php">Tehdyt tehtävät</a>
 
-    <img src="" alt="" srcset="">
+    
     
 </body>
 </html>
