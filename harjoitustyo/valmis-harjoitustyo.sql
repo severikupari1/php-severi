@@ -48,10 +48,6 @@ CREATE TABLE IF NOT EXISTS `customer` (
 -- Dumping data for table `customer`
 --
 
-INSERT INTO `customer` (`key_id`, `username`, `password`, `name`, `address`, `billing_address`, `phone_number`, `email`, `apartment_type`, `apartment_area`, `property`) VALUES
-(9, 'severi', 'kupari', 'severi', 'papinkuja7', 'testilasku', '0404040', 'asdsd@', 'omakotitalo', '49', '123'),
-(10, 'krista', 'krista', 'krista toivonen', 'ternujonetie ', 'a', 'asdasdasd', 'asdasd@', 'omakotitalo', '150', '300'),
-(11, 'timo', 'kupari', 'timo kupari', 'paavalniementie ', 'aaaaaa', '040404040', 'timo.....@', 'omakotitalo', '250', '8080');
 
 -- --------------------------------------------------------
 
@@ -81,9 +77,6 @@ CREATE TABLE IF NOT EXISTS `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `customer_id`, `description`, `order_date`, `start_date`, `status`, `acception_date`, `rejection_date`, `comment`, `workhours`, `supplement`, `cost`, `finished_time`) VALUES
-(64, 11, 'testi', '2017-12-30', '2017-12-30', 'HYVAKSYTTY', '2017-12-30', NULL, 'tarjotaan', NULL, NULL, 300, NULL),
-(65, 11, 'asd', '2017-12-30', NULL, 'TILATTU', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -113,10 +106,6 @@ CREATE TABLE IF NOT EXISTS `requestorder` (
 -- Dumping data for table `requestorder`
 --
 
-INSERT INTO `requestorder` (`id`, `customer_id`, `description`, `order_date`, `start_date`, `status`, `acception_date`, `rejection_date`, `comment`, `workhours`, `supplement`, `cost`, `finished_time`) VALUES
-(29, 11, 'testi', '2017-12-30', NULL, 'HYVAKSYTTY', '2017-12-30', NULL, 'tarjotaan', 2, 'tarvikkeita meni 10e', 300, '2017-12-30'),
-(30, 11, 'testi', '2017-12-30', NULL, 'HYVAKSYTTY', '2017-12-30', NULL, 'tarjotaan', 2, 'tarvikkeita meni 10e', 300, '2017-12-30');
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
