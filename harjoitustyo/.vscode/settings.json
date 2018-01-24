@@ -1,2 +1,8 @@
 {
+    "php.validate.executablePath": "C:\\wamp64\\bin\\php\\php5.6.25\\php.exe",
+    "liveServer.settings.proxy": {
+        "enable": true,
+        "baseUri": "/",
+        "proxyUri": "http://127.0.0.1:80/harjoitustyo"
+    }
 }
